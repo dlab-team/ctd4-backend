@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  db:
+    container_name: devsafio_api_db
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres-network
+  app:
+    container_name: ${APP_CONTAINER_NAME}
+    build: .
+    command: bash -c "npm run dev"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - postgres-network
+
+networks:
+  postgres-network:
+    driver: bridge
