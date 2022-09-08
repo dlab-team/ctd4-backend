@@ -42,3 +42,9 @@ contributions. Please review
 our [contributing guidelines](./CONTRIBUTING.md) before
 submitting any issues or pull requests to ensure we have all the necessary information to effectively respond to your
 bug report or contribution.
+
+## Equipo
+
+Team Backend:
+
+FS: [Nicolás Fariña](https://github.com/nico-ras)
