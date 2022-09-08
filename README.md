@@ -42,3 +42,13 @@ contributions. Please review
 our [contributing guidelines](./CONTRIBUTING.md) before
 submitting any issues or pull requests to ensure we have all the necessary information to effectively respond to your
 bug report or contribution.
+
+##Equipo
+
+TL [Sebastián Vidal Aedo] (https://github.com/sebavidal10)
+
+Team Frontend:
+(Daniela Hernández) (https://github.com/DanyBeth-Dev)
+
+Team Backend:
+(Daniela Hernández) (https://github.com/DanyBeth-Dev)
