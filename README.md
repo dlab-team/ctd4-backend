@@ -11,12 +11,16 @@ To run this project you previously need to install:
 
 ### Running the App with Docker
 
+Here you will run the application
+with Docker.
+it's easy to write. You can...
+
 #### Create the container's network
 
 ```
 make network
 ```
-
+have network conected on the backend, and see the fastest way to check the storage of data in a mock or real deployed database.
 #### Starting the containers
 
 ```
