@@ -48,3 +48,4 @@ bug report or contribution.
 #####
 List of the team, rembember to manifest your actions on a proyect.
 FS: [Paul Levy Díaz](https://github.com/Strike2-ux)
+FS: [Angela Medina](https://github.com/angelamedina)
