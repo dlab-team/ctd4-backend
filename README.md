@@ -45,6 +45,16 @@ our [contributing guidelines](./CONTRIBUTING.md) before
 submitting any issues or pull requests to ensure we have all the necessary information to effectively respond to your
 bug report or contribution.
 
-#####
-List of the team, rembember to manifest your actions on a proyect.
-FS: [Paul Levy Díaz](https://github.com/Strike2-ux)
+## Equipo  
+
+TL [Sebastián Vidal Aedo] (https://github.com/sebavidal10)  
+
+Team Frontend:  
+(Daniela Hernández) (https://github.com/DanyBeth-Dev)  
+
+Team Backend:  
+FS: [Paul Levy Díaz](https://github.com/Strike2-ux)  
+FS: [Angela Medina](https://github.com/angelamedina)  
+(Daniela Hernández) (https://github.com/DanyBeth-Dev  
+FS: [Emerson Espinoza](https://github.com/emersonxinay)  
+FS: [Nicolás Fariña](https://github.com/nico-ras)  
