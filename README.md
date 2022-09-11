@@ -1,6 +1,8 @@
 # Devsafio API
 
-Proyecto para programa DLAB - Desafio Latam
+Proyect for the DLAB - Desafio Latam
+
+This will be 
 
 ## Usage
 Check the package.json file for `npm` commands
@@ -51,6 +53,8 @@ Team Frontend:
 (Daniela Hernández) (https://github.com/DanyBeth-Dev)  
 
 Team Backend:  
+FS: [Paul Levy Díaz](https://github.com/Strike2-ux)  
+FS: [Angela Medina](https://github.com/angelamedina)  
 (Daniela Hernández) (https://github.com/DanyBeth-Dev  
 FS: [Emerson Espinoza](https://github.com/emersonxinay)  
-FS: [Nicolás Fariña](https://github.com/nico-ras)
+FS: [Nicolás Fariña](https://github.com/nico-ras)  
