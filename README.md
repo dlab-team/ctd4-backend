@@ -64,7 +64,6 @@ FS: [Nicolás Fariña](https://github.com/nico-ras)
 FS: [Daniela Hernández Gajardo](https://github.com/DanyBeth-Dev)
 
 
-
 # Project Description
 Web project for the DLAB company that aims to be a bridge between digital talents and IT companies.
 To meet this objective, the Incubadora Desafio-Latam was asked to create a platform capable of managing as users those graduates who are looking for work in the area of ​​technology, to then make available the respective technical tests requested by the companies and generate a Job-Ready profile that certifies them in their future applications.
@@ -75,5 +74,3 @@ To meet this objective, the Incubadora Desafio-Latam was asked to create a platf
 User Registration and Login (wip)
 Profile Management (wip)
 User State (Active / JobReady) (wip)
-
-
