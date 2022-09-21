@@ -1,69 +1,59 @@
-# Devsafio API
 
-Proyect for the DLAB - Desafio Latam
-
-This will be 
-
-## Usage
-Check the package.json file for `npm` commands
-
+# Dependencies
+This project was built mainly with the following technologies:
+- `Javascript`
+- `React` 
+- `Node.js`
+ 
+# Project Usage
+Step by step of the commands to execute
+Check the `package.json` file for `npm` commands
 To run this project you previously need to install:
-
 - `docker` & `docker-compose`
 
-### Running the App with Docker
-
-Here you will run the application
-with Docker.
-it's easy to write. You can...
-
+- ### Running the App with Docker
+Here you will run the application with Docker. it's easy to write. You can...
 #### Create the container's network
-
 ```
 make network
 ```
-have network connected on the backend, and see the fastest way to check the storage of data in a mock or real deployed database.
 #### Starting the containers
-
 ```
 make run
 ```
-
 #### Access the container through SSH
-
 ```
 make enter
 ```
+- ### Running the App for frontend and backend separately
+#### Frontend
+```
+npm install
+npm run serve
+```
+#### Backend
+```
+npm install
+make network
+make run
+```
 
-## Help and Support
-
-If you think you may have found a bug, please open an [issue](https://github.com/seguelador/nodejs-express-boilerplate/issues).
-
-> Please don't hesitate to ask! Your question will likely be useful for other people and help us to improve the existing documentation.
-
-## Contributing
-
-We work hard to provide a high-quality and useful SDK for our Fury services, and we greatly value feedback and
-contributions. Please review
-our [contributing guidelines](./CONTRIBUTING.md) before
-submitting any issues or pull requests to ensure we have all the necessary information to effectively respond to your
-bug report or contribution.
-
-## Equipo
-
+# Team
+People who participate in the project and their link to github
+### Technical Leader
 TL: [Sebastián Vidal Aedo](https://github.com/sebavidal10)  
 
-Team Frontend:  
+### Frontend Team :  
 FS: [Paul Levy Díaz](https://github.com/Strike2-ux)  
 FS: [Daniela Hernández Gajardo](https://github.com/DanyBeth-Dev)  
 FE: [Antoni Perez](https://github.com/antoniPrz)  
 FS: [Carlos Araya Salfate](https://github.com/Charlie2208)  
 FS: [Viviana Vera Ceballos](https://github.com/vverac)  
 FE: [Andrea Leal](https://github.com/andrelealr)  
-[Matías González Lorca](https://github.com/MatiasGonzalezL)  
+FE: [Matías González Lorca](https://github.com/MatiasGonzalezL)  
 FS:[Angela Medina](https://github.com/angelamedina)  
 
-Team Backend:  
+### Backend Team :  
 FS: [Juan Esteban Echeverria](https://github.com/Juan-Esteban-Echeverria)  
 FS: [Paul Levy Diaz](https://github.com/Strike2-ux)  
 FS: [Sebastian Vera](https://github.com/Verastian)  
@@ -72,3 +62,15 @@ FS: [David Aravena Poblete](https://github.com/david-aravena)
 FS: [Katherine Cornejo Tejeda](https://github.com/Kathecot)  
 FS: [Nicolás Fariña](https://github.com/nico-ras)  
 FS: [Daniela Hernández Gajardo](https://github.com/DanyBeth-Dev)
+
+
+# Project Description
+Web project for the DLAB company that aims to be a bridge between digital talents and IT companies.
+To meet this objective, the Incubadora Desafio-Latam was asked to create a platform capable of managing as users those graduates who are looking for work in the area of ​​technology, to then make available the respective technical tests requested by the companies and generate a Job-Ready profile that certifies them in their future applications.
+- [Swagger Link](proximamente) (wip)
+
+
+# Current and Future Features
+User Registration and Login (wip)
+Profile Management (wip)
+User State (Active / JobReady) (wip)
