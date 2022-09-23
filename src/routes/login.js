@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-//login request
-router.get('/', (req, res) => {
-    res.send('Ruta de logeo activa')
-});
+const controller = require('../controllers')
+
+router.post('/', controller.userAuth)
 
 module.exports = router;
