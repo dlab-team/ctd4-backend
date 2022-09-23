@@ -46,15 +46,6 @@ app.get("/ping", function (_req, res) {
   res.send("pong");
 });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument) 
-);
-app.use('/users', swaggerUi.serve, swaggerUi.setup(swaggerDocument) 
-);
-app.use('/addUser', swaggerUi.serve, swaggerUi.setup(swaggerDocument) 
-);
-app.use('/user/1', swaggerUi.serve, swaggerUi.setup(swaggerDocument) 
-);
-
 /* istanbul ignore if */
 //*This means: Run app.listen(8080) only if you are running the file
 if (!module.parent) {
@@ -65,4 +56,3 @@ if (!module.parent) {
 }
 
 module.exports = app;
-
