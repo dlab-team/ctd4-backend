@@ -8,6 +8,9 @@ const app = express();
 
 const jwt = require("jsonwebtoken")
 
+const swaggerUi = require('swagger-ui-express'),
+  swaggerDocument = require('./swagger.json');
+
 // cors config
 var corsOptions = {
   origin: '*',
@@ -43,7 +46,6 @@ app.get("/ping", function (_req, res) {
   res.send("pong");
 });
 
-
 /* istanbul ignore if */
 //*This means: Run app.listen(8080) only if you are running the file
 if (!module.parent) {
@@ -54,4 +56,3 @@ if (!module.parent) {
 }
 
 module.exports = app;
-
