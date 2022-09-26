@@ -31,6 +31,7 @@
     "express-validator": "^6.14.2",
     "http-status": "^1.5.2",
     "jsonwebtoken": "^8.5.1",
+    "node-modules": "^1.0.1",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.20.0",
