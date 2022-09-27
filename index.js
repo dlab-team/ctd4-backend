@@ -8,8 +8,6 @@ const app = express();
 
 const jwt = require("jsonwebtoken")
 
-const swaggerUi = require('swagger-ui-express'),
-  swaggerDocument = require('./swagger.json');
 
 // cors config
 var corsOptions = {

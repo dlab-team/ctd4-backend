@@ -1,0 +1,451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Lokr API",
+    "description": "Lokr API",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": ["http"],
+  "basePath": "/",
+  "produces": ["application/json"],
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Status",
+        "description": "Status",
+        "tags": ["Status"],
+        "responses": {
+          "200": {
+            "description": "Status App",
+            "schema": {
+              "type": "string",
+              "example": "OK"
+            }
+          }
+        }
+      }
+    },
+    "/resources": {
+      "get": {
+        "summary": "List of Resources",
+        "description": "The list of all resources",
+        "tags": ["Resources"],
+        "responses": {
+          "200": {
+            "description": "An array of resources",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Resource"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new Resource",
+        "description": "Create a new Resource",
+        "tags": ["Resources"],
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the name of the resource",
+            "example": "Recurso01"
+          },
+          {
+            "name": "url",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the url assoc to the resource",
+            "example": "https://www.recurso01.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The new resource created",
+            "examples": {
+              "application/json": {
+                "_id": "61926b6256d1a17c03d69b82",
+                "name": "Recurso01",
+                "url": "https://www.recurso01.co"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "description": "Register a new user",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/newUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Register a new user",
+            "examples": {
+              "application/json": {
+                "token": {
+                  "tokenType": "Bearer",
+                  "accessToken": "",
+                  "refreshToken": "",
+                  "expiresIn": "2021-11-15T14:27:09.308Z"
+                },
+                "user": {
+                  "id": "61926ab94f1236bccbab5976",
+                  "email": "user@mail.com",
+                  "role": "user",
+                  "createdAt": "2021-11-15T14:12:09.208Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh-token": {
+      "post": {
+        "summary": "Refresh token user",
+        "description": "Refresh token user",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the email of user",
+            "example": "user@mail.com"
+          },
+          {
+            "name": "refreshToken",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "token to get a new accessToken after expiration time",
+            "example": "763247rgyh87fgv3yvuvh"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refresh token user",
+            "examples": {
+              "application/json": {
+                "tokenType": "Bearer",
+                "accessToken": "",
+                "refreshToken": "",
+                "expiresIn": "2021-11-15T17:01:54.020Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login user",
+        "description": "Login user",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the email of user",
+            "example": "user@mail.com"
+          },
+          {
+            "name": "password",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the password of user",
+            "example": "1q2w3e4r"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login user",
+            "examples": {
+              "application/json": {
+                "token": {
+                  "tokenType": "Bearer",
+                  "accessToken": "",
+                  "refreshToken": "",
+                  "expiresIn": "2021-11-15T14:27:09.308Z"
+                },
+                "user": {
+                  "id": "61926ab94f1236bccbab5976",
+                  "email": "user@mail.com",
+                  "role": "user",
+                  "createdAt": "2021-11-15T14:12:09.208Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/send-password-reset": {
+      "post": {
+        "summary": "Send password reset",
+        "description": "Send password reset",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the email of user",
+            "example": "user@mail.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Send password reset successfully",
+            "schema": {
+              "type": "string",
+              "example": "success"
+            }
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "summary": "Reset password user",
+        "description": "Reset password user",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "name": "email",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the email of user",
+            "example": "user@mail.com"
+          },
+          {
+            "name": "password",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "the new password of user",
+            "example": "new_password"
+          },
+          {
+            "name": "resetToken",
+            "required": true,
+            "in": "body",
+            "type": "string",
+            "description": "token sended by email in recovery process",
+            "example": "763247rgyh87fgv3yvuvh"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password was successfully updated",
+            "schema": {
+              "type": "string",
+              "example": "Password Updated"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "List of Users",
+        "description": "The list of all users with some role (user, admin)",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "description": "them email of a specific user",
+            "example": "user@mail.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an User",
+        "description": "Create an User",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/newUser"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile info by user_id",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "summary": "Profile of User",
+        "description": "Profile info of the user authenticated",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile info of the user authenticated",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userid}": {
+      "get": {
+        "summary": "Profile of User",
+        "description": "Profile info by user_id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "userid",
+            "required": true,
+            "in": "path",
+            "type": "string",
+            "description": "the id of user",
+            "example": "61a7c784e6cbedfae47e22f7"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile info by user_id",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of resource."
+        },
+        "url": {
+          "type": "string",
+          "description": "Display path of resource."
+        }
+      }
+    },
+    "User": {
+      "properties": {
+        "_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Display email of user."
+        },
+        "role": {
+          "type": "string",
+          "description": "Display role of user."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Display createdAt of user."
+        }
+      }
+    },
+    "newUser": {
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "mail@mail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "1q2w3e4r5t6y"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearerAuth": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "JWT Authorization header"
+    }
+  }
+}
