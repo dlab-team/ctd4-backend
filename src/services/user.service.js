@@ -2,7 +2,6 @@ const { Users } = require('../models')
 const { comparePassword, passwordHashing } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
 
-
 const findUser = async ({ email, password }) => {
   try {
     // Validate user input
@@ -45,8 +44,12 @@ const generateTokenResponse = async (email, password) => {
 }
 
 const findOrCreate = async (email, password) => {
-    const newUser = await Users.create({ name: "Huaman", password: "123" })
-    return newUser
-  }
+  // TODO: evaluar si el usuario existe para no crearlo denuevo
+  // TODO: incorporar httpStatus en los mensajes
+  const passwordHashed = await passwordHashing(password)
+
+  const newUser = await Users.create({ email, password: passwordHashed })
+  return newUser
+}
 
 module.exports = { findUser, generateTokenResponse, findOrCreate }
