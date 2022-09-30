@@ -1,4 +1,4 @@
-//const User = require('../models/userModel')
+
 
 const userAuth = (req, res, next) => {
   try {
