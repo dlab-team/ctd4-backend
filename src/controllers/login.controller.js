@@ -1,8 +1,11 @@
-//const User = require('../models/userModel')
+//const User = require('../models/user')
+const service = require("../services");
+const userService = service.userService;
 
-const userAuth = (req, res, next) => {
+const userAuth = async (req, res, next) => {
   try {
-    //TODO: const { user, accessToken } = await User.findAndGenerateToken(req.body);
+    //TODO: 
+    const { user, accessToken } = await userService.findAndGenerateToken(req.body);
     //const token = generateTokenResponse(user, accessToken);
     const token = '123'
     console.log(req.body)
