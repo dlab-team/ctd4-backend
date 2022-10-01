@@ -1,39 +1,41 @@
-const { User } = require('../models/user')
+const { Users } = require('../models')
 const { comparePassword } = require('../utils/password.util')
+const { createToken } = require('../utils/token.util')
 
-const findAndGenerateToken = async (data) => {
-    try {
-        const { email, password } = data;
-        console.log(User)
-    // Validate user input
+const findUser = async ({ email, password }) => {
+  try {
     if (!(email && password)) {
-      res.status(400).send("All input is required");
+      return {
+        status: 400,
+        success: false,
+        message: 'All input is required'
+      }
     }
-    // Validate if user exist in our database
-    const user = await User.findOne({ email });
-    
-    //if (user && (await comparePassword(password, user.password))) {
-      if (user &&  password == user.password) {
-      // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
 
-      // save user token
-      user.token = token;
+    const user = await Users.findOne({ where: { email: email } })
 
-      // user
-      res.status(200).json(user);
+    if (user && (await comparePassword(password, user.password))) {
+      return {
+        status: 200,
+        success: true,
+        email: user.email,
+        password: user.password
+      }
     }
-    res.status(400).send("Invalid Credentials");
-    } catch (error) {
-        throw Error(error)
+
+    return {
+      status: 400,
+      success: false,
+      message: 'Invalid Credentials'
     }
+  } catch (error) {
+    throw Error(error)
+  }
 }
 
+const generateTokenResponse = async (email, password) => {
+  const token = createToken({ email: email }, 7200)
+  return token
+}
 
-module.exports = { findAndGenerateToken };
+module.exports = { findUser, generateTokenResponse }
