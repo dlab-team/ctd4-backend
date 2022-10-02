@@ -6,7 +6,6 @@ const findUser = async ({ email, password }) => {
   try {
     if (!(email && password)) {
       return {
-        status: 400,
         success: false,
         message: 'All input is required'
       }
@@ -16,7 +15,6 @@ const findUser = async ({ email, password }) => {
 
     if (user && (await comparePassword(password, user.password))) {
       return {
-        status: 200,
         success: true,
         email: user.email,
         password: user.password
@@ -24,7 +22,6 @@ const findUser = async ({ email, password }) => {
     }
 
     return {
-      status: 400,
       success: false,
       message: 'Invalid Credentials'
     }
