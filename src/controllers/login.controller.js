@@ -1,16 +1,26 @@
-//const User = require('../models/userModel')
+const service = require('../services')
+const userService = service.userService
+const httpStatus = require('http-status');
 
-const userAuth = (req, res, next) => {
+const userAuth = async (req, res, next) => {
   try {
-    //TODO: const { user, accessToken } = await User.findAndGenerateToken(req.body);
-    //const token = generateTokenResponse(user, accessToken);
-    const token = '123'
-    console.log(req.body)
-    return res.status(200).json({
-      success: true,  
-      message: 'Auth de usuario',
-      token,
-    })
+    
+    const { email, password, success } = await userService.findUser(req.body)
+
+    if (!success) {
+      res.status(httpStatus.UNAUTHORIZED);
+    return res.json({ message: 'Invalid Credentials'}); 
+      
+    }
+
+    const token = await userService.generateTokenResponse(email, password)
+      
+      
+      return res.status(httpStatus.OK).json({
+        message: 'Auth de usuario',
+        token
+      })
+    
   } catch (error) {
     return next(error)
   }
