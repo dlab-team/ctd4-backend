@@ -27,13 +27,13 @@ const userSignup = async (req, res, next) => {
     
     //Validación dentro de la base de datos
     const existingUser = await Users.findOne({ where: { email: email } })
-    if (existingUser) return response.status(400).json({ error: 'Este correo ya se encuentra registrado' })
+    if (existingUser) return res.status(400).json({ error: 'Este correo ya se encuentra registrado' })
     
     // Encriptacion de la contraseña
     const passwordHash = passwordHashing(password)
-    const user = new User({ email, passwordHash })
+    const user = new Users({ email, passwordHash })
     const savedUser = await user.save()
-    response.status(201).json(savedUser)
+    res.status(201).json(savedUser)
 
   } catch (error) {
     return next(error)
