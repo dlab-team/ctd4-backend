@@ -22,26 +22,25 @@ const userSignup = async (req, res, next) => {
     const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 		if (regex.test(password) === false) {
       res.status(httpStatus.BAD_REQUEST);
-      return res.json({ message: 'La Contraseña No Cumple Con Los Requisitos'});
+      return res.json({ message: 'La contraseña no cumple con los requisitos'});
 		}
     
     //Validación dentro de la base de datos
     const existingUser = await Users.findOne({ where: { email: email } })
-    if (existingUser) return res.status(400).json({ error: 'Este correo ya se encuentra registrado' })
+    if (existingUser) {
+      res.status(httpStatus.BAD_REQUEST);
+      return res.json({ message: 'Este correo ya se encuentra registrado'});
+    }
     
     // Encriptacion de la contraseña
     const passwordHash = passwordHashing(password)
     const user = new Users({ email, passwordHash })
     const savedUser = await user.save()
-    res.status(201).json(savedUser)
+    res.status(httpStatus.OK);
+    res.json(savedUser)
 
   } catch (error) {
     return next(error)
-    	console.log(error)
-        return res.status(400).json({
-          ok: false,
-          msg: error.message
-        })
   }
 }
 
