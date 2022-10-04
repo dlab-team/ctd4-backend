@@ -4,6 +4,7 @@ const router = express.Router()
 const path = require('path')
 const loginRoutes = require('./login')
 const signupRoutes = require('./signup')
+const workprofileRoutes = require('./workprofile.route')
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger/swagger.json');
@@ -17,6 +18,10 @@ const defaultRoutes = [
   {
     path: '/signup',
     route: signupRoutes
+  },
+  {
+    path: '/work-profiles',
+    route: workprofileRoutes
   }
 ]
 
@@ -30,5 +35,5 @@ router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 module.exports = router
 
 
- 
+
 
