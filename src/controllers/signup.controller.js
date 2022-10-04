@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const { json } = require('sequelize');
 const { Users } = require('../models');
 const { passwordHashing } = require('../utils/password.util');
 
@@ -36,8 +37,10 @@ const userSignup = async (req, res, next) => {
     const passwordHash = await passwordHashing(password)
     const user = await new Users({ email, password: passwordHash })
     const savedUser = await user.save()
-    res.status(httpStatus.OK);
-    res.json(savedUser)
+    return res.status(httpStatus.OK).json({
+      message: 'Usuario autenticado exitosamente',
+      user: {email}
+    })
 
   } catch (error) {
     return next(error)
