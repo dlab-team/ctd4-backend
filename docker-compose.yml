@@ -23,7 +23,7 @@ services:
     volumes:
       - .:/usr/src/app
     ports:
-      - "3000:3000"
+      - "30002:3000"
     depends_on:
       - db
     networks:
