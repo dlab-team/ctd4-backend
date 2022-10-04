@@ -1,5 +1,7 @@
 const loginController = require('./login.controller')
-const registerController = require('./register.controller')
-const logoutController = require('./logout.controller')
 
-module.exports = { loginController, registerController, logoutController }
+const signupController = require('./signup.controller')
+const workprofileController = require('./workprofile.controller')
+
+module.exports = { loginController, signupController, workprofileController }
+
