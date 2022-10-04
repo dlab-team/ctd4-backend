@@ -33,8 +33,8 @@ const userSignup = async (req, res, next) => {
     }
     
     // Encriptacion de la contraseña
-    const passwordHash = passwordHashing(password)
-    const user = new Users({ email, passwordHash })
+    const passwordHash = await passwordHashing(password)
+    const user = await new Users({ email, password: passwordHash })
     const savedUser = await user.save()
     res.status(httpStatus.OK);
     res.json(savedUser)
