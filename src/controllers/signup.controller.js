@@ -1,37 +1,32 @@
-const express = require("express");
-const router = express.Router();
-const { passwordHashing } = require("../utils/password.util");
-const User = require('../models/user');
-const { validateCreate } = require("../validators/registration");
+const httpStatus = require('http-status');
+const { Users } = require('../models');
+const { passwordHashing } = require('../utils/password.util');
 
-//registration route
-router.get('/signup', (req, res) => {
-  res.send('Ruta de logeo activa')
-});
-
-//registration request (contiene el middleware 'validateCreate' de express-validator que valida el correo y el password, es opcional usarlo ya que también sirven las regex)
-router.post('/signup', validateCreate, async (req, res) => {
+const userSignup = async (req, res, next) => {
   try {
-    const { email, password, re_password } = request.body
+    const { email, password, re_password } = req.body
     
     // Validacion campos vacios
     if(!email || !password || !re_password){
-    	throw new Error("Algunos campos estan vacios")
+      res.status(httpStatus.BAD_REQUEST);
+      return res.json({ message: 'Algunos campos estan vacios'});
     }
     
     // Validacion contraseñas desiguales
     if(password != re_password){
-    	throw new Error("Contraseñas desiguales")
+      res.status(httpStatus.BAD_REQUEST);
+      return res.json({ message: 'Contraseñas desiguales'});
     }
     
 		// Validacion requisitos contraseña
     const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
 		if (regex.test(password) === false) {
-  		throw new Error("La Contraseña No Cumple Con Los Requisitos");
+      res.status(httpStatus.BAD_REQUEST);
+      return res.json({ message: 'La Contraseña No Cumple Con Los Requisitos'});
 		}
     
     //Validación dentro de la base de datos
-    const existingUser = false
+    const existingUser = await Users.findOne({ where: { email: email } })
     if (existingUser) return response.status(400).json({ error: 'Este correo ya se encuentra registrado' })
     
     // Encriptacion de la contraseña
@@ -41,10 +36,13 @@ router.post('/signup', validateCreate, async (req, res) => {
     response.status(201).json(savedUser)
 
   } catch (error) {
+    return next(error)
     	console.log(error)
         return res.status(400).json({
           ok: false,
           msg: error.message
         })
   }
-});
+}
+
+module.exports = { userSignup }
