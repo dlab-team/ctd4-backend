@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production node ./index.js --inspect",
     "dev": " nodemon ./index.js",
     "debug": "NODE_ENV=development nodemon --inspect --inspect-brk ./index.js",
-    "db:migrate": "npx sequelize-cli db:migrate"
+    "db:migrate": "sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",
