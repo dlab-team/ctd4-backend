@@ -35,7 +35,7 @@ app.use("/", routes);
 
 app.get("/", function (_req, res) {
   res.send({
-    name: "Devsafio API",
+    name: "ctd4-backend and ",
     environment: process.env.NODE_ENV,
   });
 });

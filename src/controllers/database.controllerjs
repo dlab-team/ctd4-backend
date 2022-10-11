@@ -1,0 +1,17 @@
+const httpStatus = require('http-status');
+const { databasesService } = require("../services");
+
+const getDatabases = async (req, res) => {
+  const databases = await databasesService.getDatabases();
+  res
+    .status(httpStatus.OK)
+    .json({
+      success: true,
+      message: "Databases obtained",
+      data: databases
+    });
+};
+
+module.exports = {
+  getDatabases,
+};
