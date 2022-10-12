@@ -1,7 +1,4 @@
-const loginController = require('./login.controller')
-
-const signupController = require('./signup.controller')
+const authController = require('./auth.controller')
 const workprofileController = require('./workprofile.controller')
 
-module.exports = { loginController, signupController, workprofileController }
-
+module.exports = { authController, workprofileController }

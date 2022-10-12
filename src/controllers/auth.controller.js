@@ -1,7 +1,29 @@
+const service = require('../services')
 const httpStatus = require('http-status')
-const { json } = require('sequelize')
 const { User } = require('../models')
 const { passwordHashing } = require('../utils/password.util')
+
+const userService = service.userService
+
+const userAuth = async (req, res, next) => {
+  try {
+    const { email, password, success } = await userService.findUser(req.body)
+
+    if (!success) {
+      res.status(httpStatus.UNAUTHORIZED)
+      return res.json({ message: 'Invalid Credentials' })
+    }
+
+    const token = await userService.generateTokenResponse(email, password)
+
+    return res.status(httpStatus.OK).json({
+      message: 'Auth de usuario',
+      token
+    })
+  } catch (error) {
+    return next(error)
+  }
+}
 
 const userSignup = async (req, res, next) => {
   try {
@@ -50,4 +72,13 @@ const userSignup = async (req, res, next) => {
   }
 }
 
-module.exports = { userSignup }
+const userLogout = (req, res) => {
+  try {
+    localStorage.removeItem('token')
+    res.status(httpStatus.OK).json({ success: true, message: 'Logout Success' })
+  } catch (error) {
+    throw Error(error)
+  }
+}
+
+module.exports = { userAuth, userSignup, userLogout }
