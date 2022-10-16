@@ -1,3 +1,4 @@
-const loginController = require('./login.controller')
+const authController = require('./auth.controller')
+const workprofileController = require('./workprofile.controller')
 
-module.exports = { loginController }
+module.exports = { authController, workprofileController }

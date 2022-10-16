@@ -1,4 +1,4 @@
-const { Users } = require('../models')
+const { User } = require('../models')
 const { comparePassword } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
 
@@ -11,7 +11,7 @@ const findUser = async ({ email, password }) => {
       }
     }
 
-    const user = await Users.findOne({ where: { email: email } })
+    const user = await User.findOne({ where: { email: email } })
 
     if (user && (await comparePassword(password, user.password))) {
       return {
