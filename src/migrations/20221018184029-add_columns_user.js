@@ -12,6 +12,11 @@ module.exports = {
       type: Sequelize.ENUM('Femenino', 'Masculino', 'Otros'),
       allowNull: true
     })
+
+    await queryInterface.addColumn('Users', 'chargeId', {
+      type: Sequelize.INTEGER,
+      allowNull: true
+    })
   },
 
   async down (queryInterface, Sequelize) {
@@ -22,5 +27,6 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.removeColumn('Users', 'gender')
+    await queryInterface.removeColumn('Users', 'chargeId')
   }
 };
