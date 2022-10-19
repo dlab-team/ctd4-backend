@@ -35,8 +35,8 @@ module.exports = {
     })
 
     await queryInterface.addColumn('Users', 'status', {
-      type: Sequelize.ENUM('pending', 'active', 'jobReady'),
-      defaultValue: 'pending',
+      type: Sequelize.ENUM('activo', 'jobReady'),
+      defaultValue: 'activo',
       allowNull: false
     })
   },
