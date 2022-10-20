@@ -18,11 +18,25 @@ module.exports = (sequelize, DataTypes) => {
   }
   EducationalProfile.init({
     userId: DataTypes.INTEGER,
-    levelEducational: DataTypes.ENUM,
+    levelEducational: DataTypes.ENUM("Universidad Completa",
+          "Universidad Incompleta o en curso",
+          "Instituto Profesional o CFT completa",
+          "Instituto Profesional o CFT incompleta o en curso",
+          "Educación Media Completa",
+          "Bootcamp Completo",
+          "Bootcamp Incompleto o en curso",
+          "Escolar Completa",
+          "Escolar Incompleta"),
     careerName: DataTypes.STRING,
     institutionName: DataTypes.STRING,
-    institutionType: DataTypes.STRING,
-    currentSituation: DataTypes.ENUM,
+    institutionType: DataTypes.ENUM("Postgrado",
+          "Universidad",
+          "Instituto",
+          "Bootcamp",
+          "Otro"),
+    currentSituation: DataTypes.ENUM("Egresado/a",
+        "Titulado/a",
+        "En Curso"),
     graduationDate: DataTypes.DATE
   }, {
     sequelize,
