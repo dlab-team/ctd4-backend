@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
+
 const authRoutes = require('./auth.route')
 const workprofileRoutes = require('./workprofile.route')
+const userRoutes = require('./user.route')
 
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger/swagger.json')
@@ -14,7 +16,12 @@ const defaultRoutes = [
   {
     path: '/work-profiles',
     route: workprofileRoutes
+  },
+  {
+    path: '/user-profile',
+    route: userRoutes
   }
+
 ]
 
 defaultRoutes.forEach((route) => {
