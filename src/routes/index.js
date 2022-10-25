@@ -21,7 +21,6 @@ const defaultRoutes = [
     path: '/user-profile',
     route: userRoutes
   }
-
 ]
 
 defaultRoutes.forEach((route) => {
