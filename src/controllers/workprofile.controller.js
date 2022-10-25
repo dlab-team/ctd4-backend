@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { workprofileService } = require("../services");
+const workProfileView = require('../views/workProfile.view');
 
 const createWorkProfile = async (req, res, next) => {
 
@@ -75,10 +76,22 @@ const updateWorkProfile = async (req, res, next) => {
     next();
 
 };
+    const getWorkProfile = async (req, res) => {
+        res.status(200).json({ success: true, message: "Work Profiles obtained" });
+      
+        next(); };
+    
+    const deleteWorkProfile = async (req, res) => {
+        res.status(200).json({ success: true, message: "Work Profile deleted" });
+          };
+    
 
+    
 
 
 module.exports = {
     createWorkProfile,
     updateWorkProfile,
+    getWorkProfile,
+    deleteWorkProfile
 };
