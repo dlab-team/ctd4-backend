@@ -29,10 +29,19 @@ const findUser = async ({ email, password }) => {
     throw Error(error)
   }
 }
+getUserByEmail = async (email) => {
+  try {
+    const userFound = await User.findOne({ where: { email: email } })
+    return userFound
+  } catch (error) {
+    throw Error(error)
+
+  }
+}
 
 const generateTokenResponse = async (email, password) => {
   const token = createToken({ email: email }, 7200)
   return token
 }
 
-module.exports = { findUser, generateTokenResponse }
+module.exports = { findUser, generateTokenResponse, getUserByEmail }
