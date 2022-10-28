@@ -44,12 +44,12 @@ const userSignup = async (req, res, next) => {
     }
 
     // Validacion requisitos contraseña
-    // const regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})')
-    // if (regex.test(password) === false) {
-    //   return res
-    //     .status(httpStatus.BAD_REQUEST)
-    //     .json({ message: 'La contraseña no cumple con los requisitos' })
-    // }
+    const regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})')
+    if (regex.test(password) === false) {
+      return res
+        .status(httpStatus.BAD_REQUEST)
+        .json({ message: 'La contraseña no cumple con los requisitos' })
+    }
 
     //Validación dentro de la base de datos
     const existingUser = await User.findOne({ where: { email: email } })
