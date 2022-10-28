@@ -6,7 +6,7 @@ const router = express.Router()
 router.route("/")
     .get(checkAuth, userController.getUserInfo)//! 'getUsers' if list users
     .post(checkAuth, userController.saveUser);
-router.route("/:id")
+router.route("/:userId")
     .put(checkAuth, userController.updateUser)
 
 

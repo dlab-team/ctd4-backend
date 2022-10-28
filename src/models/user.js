@@ -15,25 +15,26 @@ module.exports = (sequelize, DataTypes) => {
         // onDelete:"CASCADE",
         // onUpdate:"CASCADE"
       }),
-      this.belongsToMany(models.Rol,{through:"UserRol",
-      foreignKey:"userId",
-      onDelete:"CASCADE",
-      onUpdate:"CASCADE"
-      }),
-      this.hasMany(models.EducationalProfile, {
-        foreignKey: 'educationalProfileId',
-        // onDelete:"CASCADE",
-        // onUpdate:"CASCADE"
-      }),
-      this.hasOne(models.WorkProfile,{
-        foreignKey:"userId",
-        targetKey:"id"
-      }),
-      this.hasMany(models.Charge, {
-        foreignKey: 'chargeId',
-        // onDelete:"CASCADE",
-        // onUpdate:"CASCADE"
-      })
+        this.belongsToMany(models.Rol, {
+          through: "UserRol",
+          foreignKey: "userId",
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE"
+        }),
+        this.hasMany(models.EducationalProfile, {
+          foreignKey: 'educationalProfileId',
+          // onDelete:"CASCADE",
+          // onUpdate:"CASCADE"
+        }),
+        this.hasOne(models.WorkProfile, {
+          foreignKey: "userId",
+          targetKey: "id"
+        }),
+        this.hasMany(models.Charge, {
+          foreignKey: 'chargeId',
+          // onDelete:"CASCADE",
+          // onUpdate:"CASCADE"
+        })
 
     }
   }
@@ -42,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       name: DataTypes.STRING,
+      cityId: DataTypes.INTEGER,
       lastName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       address: DataTypes.STRING,

@@ -1,4 +1,5 @@
-const httpStatus = require('http-status')
+const httpStatus = require('http-status');
+const { userService } = require('../services');
 // TODO: cambiar nombre del metodo a un estandar es decir 'getUsers' si es una lista de usuarios o 'getUser' si solo es uno
 const getUserInfo = async (req, res) => {
     try {
@@ -25,23 +26,45 @@ const saveUser = (req, res) => {
 
 }
 const updateUser = async (req, res) => {
-    const { id } = req.user
-    console.log(id)
-    // verify access token 
-    // get id param 
-    // check if User exist
-    // if not exist return error message
-    // update de User in database
-    // retun successful message
     try {
-        res.send('return user')
-        // .json({ data: req.user })
+        const { userId } = req.params
+        const { email, name, lastName, address, phoneNumber, cityId } = req.body.user
+        const userExists = await userService.getUserById(userId)
+        if (!userExists) {
+            const error = new Error('¡EL usuario no existe!')
+            return res.status(httpStatus.NOT_FOUND).json({
+                ok: false,
+                msg: error.message
+            });
+        }
+        userExists.name = name || userExists;
+        userExists.email = email || userExists.email;
+        userExists.lastName = lastName || userExists.lastName
+        userExists.address = address || userExists.address
+        userExists.phoneNumber = phoneNumber || userExists.phoneNumber
+        userExists.cityId = cityId || userExists.cityId
+
+
+        const updateUser = await userService.saveUser(userExists)
+
+        if (!updateUser) {
+            const error = new Error('¡EL usuario No pudo ser actualizado!')
+            return res.status(httpStatus.BAD_REQUEST).json({
+                ok: false,
+                msg: error.message
+            });
+        }
+
+        return res.status(httpStatus.OK).json({ msg: "El usuario se actualizo correctamente" });
+
     } catch (error) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
             ok: false,
-            msg: error.mesagge
+            msg: error.message
         });
+
     }
+
 }
 
 module.exports = { getUserInfo, saveUser, updateUser }

@@ -22,7 +22,7 @@ const checkAuth = async (req, res, next) => {
     }
     if (!token) {
         const error = new Error('Invalid Token')
-        return res.status(httpStatus.UNAUTHORIZED).json({ message: '', errors: error.message });
+        return res.status(httpStatus.UNAUTHORIZED).json({ message: error.message });
     }
     next()
 }
