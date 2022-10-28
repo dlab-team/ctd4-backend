@@ -11,8 +11,30 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.City, {
-        foreignKey: 'cityId'
+        foreignKey: 'cityId',
+        // onDelete:"CASCADE",
+        // onUpdate:"CASCADE"
+      }),
+      this.belongsToMany(models.Rol,{through:"UserRol",
+      foreignKey:"userId",
+      onDelete:"CASCADE",
+      onUpdate:"CASCADE"
+      }),
+      this.hasMany(models.EducationalProfile, {
+        foreignKey: 'educationalProfileId',
+        // onDelete:"CASCADE",
+        // onUpdate:"CASCADE"
+      }),
+      this.hasOne(models.WorkProfile,{
+        foreignKey:"userId",
+        targetKey:"id"
+      }),
+      this.hasMany(models.Charge, {
+        foreignKey: 'chargeId',
+        // onDelete:"CASCADE",
+        // onUpdate:"CASCADE"
       })
+
     }
   }
   User.init(
@@ -23,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       lastName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       address: DataTypes.STRING,
-      status: DataTypes.ENUM('pending', 'active', 'jobReady')
+      status: DataTypes.ENUM('activo', 'jobReady')
     },
     {
       sequelize,
