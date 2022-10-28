@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const authRoutes = require('./auth.route')
 const workprofileRoutes = require('./workprofile.route')
+const skillRoutes = require('./skill.route')
+const countryRoutes = require('./country.route')
 
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger/swagger.json')
@@ -14,6 +16,14 @@ const defaultRoutes = [
   {
     path: '/work-profiles',
     route: workprofileRoutes
+  },
+  {
+    path: '/skills',
+    route: skillRoutes
+  },
+  {
+    path: '/countries',
+    route: countryRoutes
   }
 ]
 
