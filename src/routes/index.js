@@ -3,6 +3,7 @@ const router = express.Router()
 
 const authRoutes = require('./auth.route')
 const workprofileRoutes = require('./workprofile.route')
+
 const userRoutes = require('./user.route')
 
 const swaggerUi = require('swagger-ui-express')
