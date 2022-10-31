@@ -19,7 +19,7 @@ const defaultRoutes = [
     route: workprofileRoutes
   },
   {
-    path: '/user-profile',
+    path: '/user-profile',//TODO: este deberia ser solo user 
     route: userRoutes
   }
 ]

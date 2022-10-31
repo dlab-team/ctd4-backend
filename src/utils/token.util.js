@@ -9,8 +9,8 @@ const createToken = (payload, expires) => {
 }
 
 const decodeToken = (token) => {
-  const { id } = jwt.verify(token, process.env.SECRET)
-  return id
+  const { email } = jwt.verify(token, process.env.SECRET)
+  return email
 }
 
 module.exports = { createToken, decodeToken }
