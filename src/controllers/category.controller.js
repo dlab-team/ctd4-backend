@@ -1,5 +1,4 @@
 const httpStatus = require('http-status')
-const { categoryService } = require('../services')
 const { json } = require('sequelize')
 const { Category } = require('../models')
 

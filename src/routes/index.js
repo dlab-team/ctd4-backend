@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const authRoutes = require('./auth.route')
 const workprofileRoutes = require('./workprofile.route')
-const cityRoute = require('./city.route')
-const categoryRoute = require('./category.route')
+const cityRoutes = require('./city.route')
+const categoryRoutes = require('./category.route')
 
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('./swagger/swagger.json')
@@ -19,11 +19,11 @@ const defaultRoutes = [
   },
   {
     path: '/cities',
-    route: cityRoute
+    route: cityRoutes
   },
   {
     path: '/categories',
-    route: categoryRoute
+    route: categoryRoutes
   }
 ]
 
