@@ -1,12 +1,50 @@
-const { cityService } = require('../services')
+const httpStatus = require('http-status')
+const { json } = require('sequelize')
+const { City } = require('../models')
 
-const createCity = async (req, res) => {
-  const { name } = req.body
-  console.log(name)
-  const city = await cityService.getCity(name)
-  res.send(city)
+const getCities = async (req, res) => {
+  try {
+    const cities = await City.findAll({
+      attributes: ['id', 'countryId', 'name']
+    })
+    console.log(json(cities))
+    res.json(cities)
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      ok: false,
+      msg: console.error.message
+    })
+  }
 }
 
-const updateCity = () => {}
+const postCities = async (req, res) => {
+  try {
+    const cities = await CreateCities({
+      attributes: ['id', 'countryId', 'name']
+    })
+    console.log(json(cities))
+    res.json(cities)
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      ok: false,
+      msg: console.error.message
+    })
+  }
+}
 
-module.exports = { createCity, updateCity }
+const updateCities = async (req, res) => {
+  try {
+    const cities = await updateCities({
+      attributes: ['id', 'countryId', 'name']
+    })
+    console.log(json(cities))
+    res.json(cities)
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      ok: false,
+      msg: console.error.message
+    })
+  }
+}
+
+module.exports = { getCities, postCities, updateCities }

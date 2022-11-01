@@ -3,8 +3,9 @@ const { cityController } = require('../controllers/')
 
 const router = express.Router()
 
-router.post('/', cityController.createCity)
-router.put('/:id', cityController.updateCity)
+router.get('/', cityController.getCities)
+router.post('/', cityController.postCities)
+router.put('/:id', cityController.updateCities)
 
 // Get enum Values
 
