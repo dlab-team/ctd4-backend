@@ -7,7 +7,6 @@ const getCities = async (req, res) => {
     const cities = await City.findAll({
       attributes: ['id', 'countryId', 'name']
     })
-    console.log(json(cities))
     res.json(cities)
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -17,34 +16,4 @@ const getCities = async (req, res) => {
   }
 }
 
-const postCities = async (req, res) => {
-  try {
-    const cities = await CreateCities({
-      attributes: ['id', 'countryId', 'name']
-    })
-    console.log(json(cities))
-    res.json(cities)
-  } catch (error) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      ok: false,
-      msg: console.error.message
-    })
-  }
-}
-
-const updateCities = async (req, res) => {
-  try {
-    const cities = await updateCities({
-      attributes: ['id', 'countryId', 'name']
-    })
-    console.log(json(cities))
-    res.json(cities)
-  } catch (error) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      ok: false,
-      msg: console.error.message
-    })
-  }
-}
-
-module.exports = { getCities, postCities, updateCities }
+module.exports = { getCities }
