@@ -1,13 +1,13 @@
 const httpStatus = require('http-status');
 const { json } = require('sequelize');
-const { Skill } = require('../models');
+const { Country } = require('../models');
 
-const getSkills = async (req, res) => {
+const getCountries = async (req, res) => {
   try{
-    const skills = await Skill.findAll({
+    const countries = await Country.findAll({
       attributes: ['id', 'name']
     })
-    res.json(skills)
+    res.json(countries)
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       ok:false,
@@ -15,4 +15,4 @@ const getSkills = async (req, res) => {
     });
   }
 };
-module.exports = {getSkills}
+module.exports = {getCountries}
