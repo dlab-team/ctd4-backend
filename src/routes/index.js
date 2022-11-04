@@ -3,6 +3,9 @@ const router = express.Router()
 
 const authRoutes = require('./auth.route')
 const workprofileRoutes = require('./workprofile.route')
+const cityRoutes = require('./city.route')
+const categoryRoutes = require('./category.route')
+const chargeRoutes = require('./charge.route')
 
 const userRoutes = require('./user.route')
 
@@ -19,8 +22,21 @@ const defaultRoutes = [
     route: workprofileRoutes
   },
   {
-    path: '/user-profile',
+    path: '/user-profile',//TODO: este deberia ser solo user 
     route: userRoutes
+  },
+  {
+
+    path: '/cities',
+    route: cityRoutes
+  },
+  {
+    path: '/categories',
+    route: categoryRoutes
+  },
+  {
+    path: '/charges',
+    route: chargeRoutes
   }
 ]
 
