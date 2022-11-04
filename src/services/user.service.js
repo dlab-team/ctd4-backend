@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, City, Country } = require('../models')
 const { comparePassword } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
 
@@ -29,10 +29,43 @@ const findUser = async ({ email, password }) => {
     throw Error(error)
   }
 }
+getUserByEmail = async (email) => {
+  try {
+    const userFound = await User.findOne({ where: { email } })
+    return userFound
+  } catch (error) {
+    throw Error(error)
+
+  }
+}
+getUserById = async (id) => {
+  try {
+    const userFound = await User.findOne({
+      where: { id },
+      include: { model: City, include: { model: Country } },
+
+    });
+
+    return userFound;
+  } catch (error) {
+    throw Error(error)
+
+  }
+}
+const saveUser = async (user) => {
+  try {
+    const newUser = await user.save();
+    return newUser;
+  } catch (error) {
+    throw Error(error)
+
+  }
+}
+
 
 const generateTokenResponse = async (email, password) => {
   const token = createToken({ email: email }, 7200)
   return token
 }
 
-module.exports = { findUser, generateTokenResponse }
+module.exports = { findUser, generateTokenResponse, getUserByEmail, getUserById, saveUser }
