@@ -1,5 +1,7 @@
 const authController = require('./auth.controller')
 const workprofileController = require('./workprofile.controller')
+const skillController = require('./skill.controller')
+const countryController = require('./country.controller')
 const cityController = require('./city.controller')
 const categoryController = require('./category.controller')
 const userController = require('./user.controller')
@@ -11,6 +13,7 @@ module.exports = {
   cityController,
   categoryController, 
   userController,
-  chargeController
+  chargeController,
+  skillController, 
+  countryController
 }
-
