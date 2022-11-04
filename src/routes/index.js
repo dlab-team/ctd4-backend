@@ -31,7 +31,7 @@ const defaultRoutes = [
     path: '/countries',
     route: countryRoutes
   },{
-    path: '/user-profile',//TODO: este deberia ser solo user 
+    path: '/user',
     route: userRoutes
   },
   {
