@@ -6,27 +6,37 @@ module.exports = {
       'Charges',
       [
         {
-          name: 'Full stack',
+          name: 'Desarrollador/a Full stack',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Backend',
+          name: 'Desarrollador/a Backend',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Frontend',
+          name: 'Desarrollador/a Frontend',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Data Science',
+          name: 'Diseñador/a UI/UX Research o UI',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'UI/UX',
+          name: 'Desarrollador/a Movil',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'Data Scientist o especialista Machine Learning',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'Ingeniería de Datos',
           createdAt: new Date(),
           updatedAt: new Date()
         }
