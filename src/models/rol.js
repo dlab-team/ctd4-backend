@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Rol extends Model {
     /**
@@ -12,18 +10,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsToMany(models.User, {
-        through: "UserRol",
-        foreignKey: "rolId",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE"
+        through: 'UserRol',
+        foreignKey: 'rolId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       })
     }
   }
-  Rol.init({
-    name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Rol',
-  });
-  return Rol;
-};
+  Rol.init(
+    {
+      name: DataTypes.STRING
+    },
+    {
+      sequelize,
+      modelName: 'Rol'
+    }
+  )
+  return Rol
+}

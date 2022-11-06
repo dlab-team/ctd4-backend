@@ -6,17 +6,20 @@ module.exports = {
       'Rols',
       [
         {
-          name: 'Adminstrador',
+          // administrador
+          level: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Postulante',
+          // Postulante
+          level: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Empresa',
+          // empresa
+          level: 3,
           createdAt: new Date(),
           updatedAt: new Date()
         }
