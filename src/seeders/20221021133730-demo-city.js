@@ -13,7 +13,7 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          name: 'Santiago',
+          name: 'Concepción',
           countryId: 1,
           createdAt: new Date(),
           updatedAt: new Date()

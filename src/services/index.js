@@ -1,4 +1,7 @@
-const userService = require("./user.service");
-const workprofileService = require("./workprofile.services");
+const userService = require('./user.service')
+const workprofileService = require('./workprofile.services')
 
-module.exports = { userService, workprofileService };
+module.exports = {
+  userService,
+  workprofileService
+}

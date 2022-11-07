@@ -27,7 +27,7 @@ const userAuth = async (req, res, next) => {
 
 const userSignup = async (req, res, next) => {
   try {
-    const { email, password, re_password } = req.body
+    const { email, name, password, re_password } = req.body
 
     // Validacion campos vacios
     if (!email || !password || !re_password) {
@@ -61,7 +61,7 @@ const userSignup = async (req, res, next) => {
 
     // Encriptacion de la contraseña
     const passwordHash = await passwordHashing(password)
-    const user = await new User({ email, password: passwordHash })
+    const user = await new User({ email, name, password: passwordHash })
     await user.save()
     return res.status(httpStatus.OK).json({
       message: 'Usuario autenticado exitosamente',
