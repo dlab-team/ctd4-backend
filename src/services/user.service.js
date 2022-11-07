@@ -1,4 +1,4 @@
-const { User, City, Country } = require('../models')
+const { User, City, Country, EducationalProfile } = require('../models')
 const { comparePassword } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
 
@@ -67,5 +67,13 @@ const generateTokenResponse = async (email, password) => {
   const token = createToken({ email: email }, 7200)
   return token
 }
+const getEducationalProfilesByIdUser = async (userId) => {
+  try {
+    const profile = await EducationalProfile.findOne({ where: userId, attributes: { exclude: ['createdAt', 'updatedAt'] } })
+    return profile
+  } catch (error) {
+    throw Error(error)
+  }
+}
 
-module.exports = { findUser, generateTokenResponse, getUserByEmail, getUserById, saveUser }
+module.exports = { findUser, generateTokenResponse, getUserByEmail, getUserById, saveUser, getEducationalProfilesByIdUser }

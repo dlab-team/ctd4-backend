@@ -7,6 +7,8 @@ router.route("/")
     .get(checkAuth, userController.getUserInfo)
 router.route("/:userId")
     .put(checkAuth, userController.updateUser)
+router.route('/:userId/educational')
+    .get(checkAuth, userController.getEducationalProfiles)
 
 
 module.exports = router

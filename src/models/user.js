@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           onUpdate: "CASCADE"
         }),
         this.hasMany(models.EducationalProfile, {
-          foreignKey: 'educationalProfileId',
+          foreignKey: 'userId',
           // onDelete:"CASCADE",
           // onUpdate:"CASCADE"
         }),
