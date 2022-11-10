@@ -13,9 +13,9 @@ module.exports = {
       }
     })
     const info = await transport.sendMail({
-      from: '"DLAB- Administrador de Proyectos" <cuentas@taskaban.com>',
+      from: '"Devsafio - " <cuentas@taskaban.com>',
       to: _email,
-      subject: "DLAB - Reestablecer el Password",
+      subject: "Devsafio - Reestablecer el Password",
       text: "Restablecer tu password",
       html: ` <div>
             <h2>hola ${name}, has solicitado reestablecer tu password</h2>
