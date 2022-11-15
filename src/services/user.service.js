@@ -31,7 +31,7 @@ const findUser = async ({ email, password }) => {
 }
 getUserByEmail = async (email) => {
   try {
-    const userFound = await User.findOne({ where: { email } })
+    const userFound = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } })
     return userFound
   } catch (error) {
     throw Error(error)
