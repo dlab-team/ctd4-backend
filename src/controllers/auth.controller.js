@@ -28,37 +28,7 @@ const userAuth = async (req, res, next) => {
 
 const userSignup = async (req, res, next) => {
   try {
-    const { email, name, password, re_password } = req.body
-
-    // Validacion campos vacios
-    if (!email || !password || !re_password) {
-      return res
-        .status(httpStatus.BAD_REQUEST)
-        .json({ message: 'Algunos campos estan vacios' })
-    }
-
-    // Validacion contraseñas desiguales
-    if (password != re_password) {
-      return res
-        .status(httpStatus.BAD_REQUEST)
-        .json({ message: 'Contraseñas desiguales' })
-    }
-
-    // Validacion requisitos contraseña
-    const regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})')
-    if (regex.test(password) === false) {
-      return res
-        .status(httpStatus.BAD_REQUEST)
-        .json({ message: 'La contraseña no cumple con los requisitos' })
-    }
-
-    //Validación dentro de la base de datos
-    const existingUser = await User.findOne({ where: { email: email } })
-    if (existingUser) {
-      return res
-        .status(httpStatus.BAD_REQUEST)
-        .json({ message: 'Este correo ya se encuentra registrado' })
-    }
+    const { email, name, password } = req.body
 
     // Encriptacion de la contraseña
     const passwordHash = await passwordHashing(password)
@@ -102,7 +72,6 @@ const recoveryPassword = async (req, res) => {
     const { email: _email, name, token } = user;
 
     emailForgotPassword({ _email, name, token })
-    console.log(_email)
 
     res.status(httpStatus.OK).json({ msg: "Se ha enviado un correo electrónico de confirmación a su correo electrónico." });
   } catch (error) {
@@ -118,10 +87,10 @@ const verifyPassword = async (req, res) => {
     const email = decodeToken(token)
     const user = await userService.getUserByEmail(email)
 
-    if (!token) {
-      const error = new Error('No tienes los permisos necesarios')
-      res.status(httpStatus.FORBIDDEN).json({ msg: '', errors: error.message });
-    }
+    // if (!token) {
+    //   const error = new Error('No tienes los permisos necesarios')
+    //   res.status(httpStatus.FORBIDDEN).json({ msg: '', errors: error.message });
+    // }
     if (!user) {
       const error = new Error('Usuario no Encontrado!')
       return res.status(httpStatus.NOT_FOUND).json({ msg: error.message })
@@ -142,10 +111,10 @@ const createPassword = async (req, res) => {
     const email = decodeToken(token)
     const user = await userService.getUserByEmail(email)
 
-    if (!token) {
-      const error = new Error('No tienes los permisos necesarios')
-      res.status(httpStatus.FORBIDDEN).json({ msg: '', errors: error.message });
-    }
+    // if (!token) {
+    //   const error = new Error('No tienes los permisos necesarios')
+    //   res.status(httpStatus.FORBIDDEN).json({ msg: '', errors: error.message });
+    // }
     if (!user) {
       const error = new Error('Usuario no Encontrado!')
       return res.status(httpStatus.NOT_FOUND).json({ msg: error.message })

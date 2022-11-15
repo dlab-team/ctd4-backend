@@ -13,7 +13,7 @@ module.exports = {
       }
     })
     const info = await transport.sendMail({
-      from: '"Devsafio - " <cuentas@taskaban.com>',
+      from: '"Devsafio - " <devsafio@devsafio.com>',
       to: _email,
       subject: "Devsafio - Reestablecer el Password",
       text: "Restablecer tu password",
