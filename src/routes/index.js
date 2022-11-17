@@ -30,7 +30,8 @@ const defaultRoutes = [
   {
     path: '/countries',
     route: countryRoutes
-  },{
+  },
+  {
     path: '/user',
     route: userRoutes
   },
@@ -44,6 +45,10 @@ const defaultRoutes = [
   },
   {
     path: '/charges',
+    route: chargeRoutes
+  },
+  {
+    path: '/google',
     route: chargeRoutes
   }
 ]
