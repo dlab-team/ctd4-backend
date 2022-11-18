@@ -1,3 +1,5 @@
+import authGoogle from 'passport'
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth'
 const service = require('../services')
 const httpStatus = require('http-status')
 const { User } = require('../models')
@@ -81,4 +83,4 @@ const userLogout = (req, res) => {
   }
 }
 
-module.exports = { userAuth, userSignup, userLogout }
+module.exports = { userAuth, userSignup, userLogout, authGoogle }

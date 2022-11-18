@@ -4,8 +4,6 @@ const express = require('express')
 const cors = require('cors')
 const cookieSession = require('cookie-session')
 const routes = require('./src/routes/')
-import passport from 'passport'
-import '../middlewares/google.js'
 
 const app = express()
 
@@ -27,24 +25,6 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000 // duracion de 24 horas
   })
 )
-// middleware para las google
-app.use(express.json())
-app.use(passport.initialize())
-// routes de google
-// ROUTES
-
-app.use(
-  '/auth',
-  passport.authenticate('auth-google', {
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ],
-    session: false
-  }),
-  loginRouter
-)
-// fin de google
 
 app.use(cors(corsOptions))
 

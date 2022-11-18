@@ -46,10 +46,6 @@ const defaultRoutes = [
   {
     path: '/charges',
     route: chargeRoutes
-  },
-  {
-    path: '/google',
-    route: chargeRoutes
   }
 ]
 
