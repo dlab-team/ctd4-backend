@@ -1,6 +1,12 @@
+
+const path = require("path")
+const { v4: uuidv4 } = require('uuid');
+
 const httpStatus = require('http-status')
 const { workprofileService } = require('../services')
 
+
+//CREATE
 const createWorkProfile = async (req, res, next) => {
   try {
     // const work_profile = { id: '001', name: 'fake workprofile' }
@@ -30,10 +36,13 @@ const createWorkProfile = async (req, res, next) => {
 
   next()
 }
+
+// UPDATE
 const updateWorkProfile = async (req, res, next) => {
   try {
     const { workprofileId } = req.params
-    const { name } = req.body.work_profile
+    const { name, github, linkedin, urlcv, fotoID } = req.body
+    const { foto } = req.files
 
     const workProfileFound = await workprofileService.getWorkProfileById(
       workprofileId
@@ -58,7 +67,34 @@ const updateWorkProfile = async (req, res, next) => {
         msg: error.mesagge
       })
     }
+
+      //Validación requisitos foto de perfil
+      const mimeTypes = ["image/jpeg", "image/png"]
+      if(!mimeTypes.includes(foto.mimetype)){
+        return res
+          .status(httpStatus.BAD_REQUEST)
+          .json({message: 'Solo se admiten archivos png o jpg'})
+      }
+      if(foto.size > 5 * 1024 * 1024){
+        return res
+          .status(httpStatus.BAD_REQUEST)
+          .json({message: 'La foto excede el peso de 5MB'})
+      }
+
+     const pathFoto =  `${uuidv4()}.${foto.mimetype.split("/")[1]}`
+
+    // GUARDAR LA FOTO
+    
+      foto.mv(path.join(__dirname, "../assets/", pathFoto), (err) => {
+        if(err) return req.status().send(err)
+    })
+   
+    
     updateWorkprofile.name = name || updateWorkprofile.name
+    updateWorkprofile.linkedin = linkedin || updateWorkprofile.linkedin
+    updateWorkprofile.github = github || updateWorkprofile.github
+    updateWorkprofile.urlcv = urlcv || updateWorkprofile.urlcv
+    updateWorkProfile.pathFoto = pathFoto || updateWorkProfile.pathFoto
 
     res.status(httpStatus.OK).json({
       ok: true,
