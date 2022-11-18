@@ -19,3 +19,6 @@ coverage
 tmp
 
 package-lock.json
+
+#Environment Variables
+.env
