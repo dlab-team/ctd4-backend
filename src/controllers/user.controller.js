@@ -1,11 +1,12 @@
 const httpStatus = require('http-status')
-const { User } = require('../models')
+const { User, WorkProfile } = require('../models')
 const { userService } = require('../services')
 
 const getUserInfo = async (req, res) => {
   try {
     const userInfo = await User.findOne({
       attributes: { exclude: ['password'] },
+      include: [ { model: WorkProfile } ],
       where: { id: req.user.id }
     })
 
