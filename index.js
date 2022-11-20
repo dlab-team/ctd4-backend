@@ -4,7 +4,8 @@ const express = require('express')
 const cors = require('cors')
 const cookieSession = require('cookie-session')
 const routes = require('./src/routes/')
-
+const passport = require('passport');
+require('./src/utils/passport.utils');
 const app = express()
 
 const jwt = require('jsonwebtoken')
@@ -32,7 +33,13 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use('/', routes)
+
+
 
 app.get('/', function (_req, res) {
   res.send({

@@ -63,7 +63,7 @@ const saveUser = async (user) => {
 }
 
 
-const generateTokenResponse = async (email, password) => {
+const generateTokenResponse = async (email) => {
   const token = createToken({ email: email }, 7200)
   return token
 }

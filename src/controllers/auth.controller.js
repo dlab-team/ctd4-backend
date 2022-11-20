@@ -1,5 +1,4 @@
-import authGoogle from 'passport'
-import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth'
+
 const service = require('../services')
 const httpStatus = require('http-status')
 const { User } = require('../models')
@@ -16,7 +15,7 @@ const userAuth = async (req, res, next) => {
       return res.json({ message: 'Invalid Credentials' })
     }
 
-    const token = await userService.generateTokenResponse(email, password)
+    const token = await userService.generateTokenResponse(email)
 
     return res.status(httpStatus.OK).json({
       message: 'Auth de usuario',
@@ -81,6 +80,37 @@ const userLogout = (req, res) => {
   } catch (error) {
     throw Error(error)
   }
+}
+const authGoogle = async (req, res) => {
+  try {
+    console.log('USER-FROM GOOGLE: ', req.user)
+    const { name, emails, photos } = req.user
+    const email = emails[0].value
+    const nameUser = name.givenName
+    const existingUser = await userService.getUserByEmail(email);
+    let userData = {};
+    if (!existingUser) {
+      const user = new User({
+        email,
+        name: nameUser
+      })
+      userData = await userService.saveUser(user)
+    } else {
+      userData = existingUser;
+    }
+    const token = await userService.generateTokenResponse(userData.email)
+    return res.status(httpStatus.OK).json({
+      message: 'Auth de usuario',
+      token,
+
+    })
+
+  } catch (error) {
+    throw Error(error)
+  }
+
+
+
 }
 
 module.exports = { userAuth, userSignup, userLogout, authGoogle }
