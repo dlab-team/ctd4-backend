@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     urlGithub: DataTypes.STRING,
     urlWebsite: DataTypes.STRING,
     urlCv: DataTypes.STRING,
-    fotoID: DataTypes.STRING,
+    // fotoID: DataTypes.STRING,
     levelEnglish: DataTypes.ENUM("Ninguno",
         "Principiante A1",
         "Principiante A2",
