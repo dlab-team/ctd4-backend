@@ -14,12 +14,7 @@ module.exports = {
       allowNull: true
     })
 
-    await queryInterface.addColumn('Users', 'name', {
-      type: Sequelize.STRING,
-      allowNull: true
-    })
-
-    await queryInterface.addColumn('Users', 'lastName', {
+    await queryInterface.addColumn('Users', 'fullname', {
       type: Sequelize.STRING,
       allowNull: true
     })
@@ -49,8 +44,7 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.removeColumn('Users', 'cityId')
-    await queryInterface.removeColumn('Users', 'name')
-    await queryInterface.removeColumn('Users', 'lastName')
+    await queryInterface.removeColumn('Users', 'fullname')
     await queryInterface.removeColumn('Users', 'phoneNumber')
     await queryInterface.removeColumn('Users', 'address')
     await queryInterface.removeColumn('Users', 'status')

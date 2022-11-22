@@ -4,8 +4,7 @@ const { decodeToken } = require('../utils/token.util');
 
 module.exports = {
   validateSignUp: [
-    body('name').exists().notEmpty().withMessage('Debe Ingresar un Nombre'),
-    body('lastname').exists().notEmpty().withMessage('Debe Ingresar un Apellido'),
+    body('fullname').exists().notEmpty().withMessage('Debe Ingresar su Nombre Completo'),
     body('password')
       .exists()
       .isLength({ min: 8 })

@@ -28,11 +28,11 @@ const userAuth = async (req, res, next) => {
 
 const userSignup = async (req, res, next) => {
   try {
-    const { email, name, password } = req.body
+    const { email, fullname, password } = req.body
 
     // Encriptacion de la contraseña
     const passwordHash = await passwordHashing(password)
-    const user = await new User({ email, name, password: passwordHash })
+    const user = await new User({ email, fullname, password: passwordHash })
     await user.save()
     return res.status(httpStatus.OK).json({
       message: 'Usuario autenticado exitosamente',
@@ -69,9 +69,9 @@ const recoveryPassword = async (req, res) => {
     await userService.saveUser(user)
 
     // send email
-    const { email: _email, name, token } = user;
+    const { email: _email, fullname, token } = user;
 
-    emailForgotPassword({ _email, name, token })
+    emailForgotPassword({ _email, fullname, token })
 
     res.status(httpStatus.OK).json({ msg: "Se ha enviado un correo electrónico de confirmación a su correo electrónico." });
   } catch (error) {
