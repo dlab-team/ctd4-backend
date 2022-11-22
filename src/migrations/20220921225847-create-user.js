@@ -14,6 +14,34 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      cityId: {
+        type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+      gender: {
+        type: Sequelize.ENUM('Femenino', 'Masculino', 'Otros')
+      },
+      chargeId: {
+        type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.ENUM('activo', 'jobReady'),
+        defaultValue: 'activo'
+      },
+      token: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
