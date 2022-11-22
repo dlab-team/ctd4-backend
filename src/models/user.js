@@ -42,9 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      name: DataTypes.STRING,
+      fullname: DataTypes.STRING,
       cityId: DataTypes.INTEGER,
-      lastName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       address: DataTypes.STRING,
       status: DataTypes.ENUM('activo', 'jobReady')

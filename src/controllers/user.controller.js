@@ -1,12 +1,12 @@
 const httpStatus = require('http-status')
-const { User, WorkProfile } = require('../models')
+const { User, WorkProfile, EducationalProfile } = require('../models')
 const { userService } = require('../services')
 
 const getUserInfo = async (req, res) => {
   try {
     const userInfo = await User.findOne({
       attributes: { exclude: ['password'] },
-      include: [ { model: WorkProfile } ],
+      include: [ { model: WorkProfile }, { model: EducationalProfile} ],
       where: { id: req.user.id }
     })
 
@@ -23,7 +23,7 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.user.id
 
-    const { email, name, lastName, address, phoneNumber, cityId } =
+    const { email, fullname, address, phoneNumber, cityId } =
       req.body.user
     const userExists = await userService.getUserById(userId)
     if (!userExists) {
@@ -33,9 +33,8 @@ const updateUser = async (req, res) => {
         msg: error.message
       })
     }
-    userExists.name = name || userExists.name
+    userExists.fullname = fullname || userExists.fullname
     userExists.email = email || userExists.email
-    userExists.lastName = lastName || userExists.lastName
     userExists.address = address || userExists.address
     userExists.phoneNumber = phoneNumber || userExists.phoneNumber
     userExists.cityId = cityId || userExists.cityId
