@@ -28,7 +28,7 @@ const getWorkProfileById = async (userId) => {
         // const workprofile = await WorkProfile.findOne({
         // where: userId,
         // })        
-        const workprofile = { id: userId, name: 'fake workprofile' }
+        const workprofile = { id: userId, fullname: 'fake workprofile' }
         return workprofile;
     } catch (error) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({

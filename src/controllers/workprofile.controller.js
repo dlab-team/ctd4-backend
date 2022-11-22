@@ -9,7 +9,6 @@ const { workprofileService } = require('../services')
 //CREATE
 const createWorkProfile = async (req, res, next) => {
   try {
-    // const work_profile = { id: '001', name: 'fake workprofile' }
     const { work_profile } = req.body
     const newWorkProfile = await workprofileService.createWorkProfile(
       work_profile
@@ -41,7 +40,7 @@ const createWorkProfile = async (req, res, next) => {
 const updateWorkProfile = async (req, res, next) => {
   try {
     const { workprofileId } = req.params
-    const { name, github, linkedin, urlcv, fotoID } = req.body
+    const { fullname, github, linkedin, urlcv, fotoID } = req.body
     const { foto } = req.files
 
     const workProfileFound = await workprofileService.getWorkProfileById(
@@ -90,7 +89,7 @@ const updateWorkProfile = async (req, res, next) => {
     })
    
     
-    updateWorkprofile.name = name || updateWorkprofile.name
+    updateWorkprofile.fullname = fullname || updateWorkprofile.fullname
     updateWorkprofile.linkedin = linkedin || updateWorkprofile.linkedin
     updateWorkprofile.github = github || updateWorkprofile.github
     updateWorkprofile.urlcv = urlcv || updateWorkprofile.urlcv

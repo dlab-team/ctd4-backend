@@ -8,8 +8,7 @@ module.exports = {
         {
           email: 'emerson@gmail.com',
           password: '2022Password',
-          name: 'emerson',
-          lastName: 'espinoza',
+          fullname: 'emerson espinoza',
           phoneNumber: '986323844',
           address: 'calle 7, santiago',
           status: 'activo',
@@ -19,8 +18,7 @@ module.exports = {
         {
           email: 'seba@gmail.com',
           password: '2022Password',
-          name: 'seba',
-          lastName: 'vera',
+          fullname: 'seba vera',
           phoneNumber: '987323354',
           address: 'calle 8, santiago',
           status: 'activo',
@@ -30,8 +28,7 @@ module.exports = {
         {
           email: 'katherine@gmail.com',
           password: '2022Password',
-          name: 'katherine',
-          lastName: 'cornejo',
+          fullname: 'katherine cornejo',
           phoneNumber: '985323856',
           address: 'calle 9, santiago',
           status: 'activo',
@@ -41,8 +38,7 @@ module.exports = {
         {
           email: 'angela@gmail.com',
           password: '2022Password',
-          name: 'angela',
-          lastName: 'medina',
+          fullname: 'angela medina',
           phoneNumber: '985323856',
           address: 'calle 11, santiago',
           status: 'activo',
@@ -52,8 +48,7 @@ module.exports = {
         {
           email: 'paul@gmail.com',
           password: '2022Password',
-          name: 'paul',
-          lastName: 'leivi',
+          fullname: 'paul leivi',
           phoneNumber: '985323856',
           address: 'calle 12, santiago',
           status: 'activo',
@@ -63,8 +58,7 @@ module.exports = {
         {
           email: 'juan@gmail.com',
           password: '2022Password',
-          name: 'juan',
-          lastName: 'Esteban',
+          fullname: 'juan Esteban',
           phoneNumber: '985323856',
           address: 'calle 13, santiago',
           status: 'activo',

@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer')
 module.exports = {
 
   emailForgotPassword: async (data) => {
-    const { _email, name, token } = data;
+    const { _email, fullname, token } = data;
     const transport = nodemailer.createTransport({
       host: `${process.env.EMAIL_HOST}`,
       port: `${process.env.EMAIL_PORT}`,
@@ -18,7 +18,7 @@ module.exports = {
       subject: "Devsafio - Reestablecer el Password",
       text: "Restablecer tu password",
       html: ` <div>
-            <h2>hola ${name}, has solicitado reestablecer tu password</h2>
+            <h2>hola ${fullname}, has solicitado reestablecer tu password</h2>
             <br />
             <p>
               En el siguiente enlace puedes volver a generar un password:
