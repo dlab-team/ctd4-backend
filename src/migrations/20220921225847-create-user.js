@@ -17,10 +17,7 @@ module.exports = {
       cityId: {
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
-      },
-      lastName: {
+      fullname: {
         type: Sequelize.STRING
       },
       phoneNumber: {
