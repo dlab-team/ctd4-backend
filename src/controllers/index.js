@@ -6,14 +6,16 @@ const cityController = require('./city.controller')
 const categoryController = require('./category.controller')
 const userController = require('./user.controller')
 const chargeController = require('./charge.controller')
+const quizController = require('./quiz.controller')
 
 module.exports = {
   authController,
   workprofileController,
   cityController,
-  categoryController, 
+  categoryController,
   userController,
   chargeController,
-  skillController, 
-  countryController
+  skillController,
+  countryController,
+  quizController
 }

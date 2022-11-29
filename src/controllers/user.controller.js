@@ -6,7 +6,7 @@ const getUserInfo = async (req, res) => {
   try {
     const userInfo = await User.findOne({
       attributes: { exclude: ['password'] },
-      include: [ { model: WorkProfile }, { model: EducationalProfile} ],
+      include: [{ model: WorkProfile }, { model: EducationalProfile }],
       where: { id: req.user.id }
     })
 
@@ -94,33 +94,33 @@ const updateUser = async (req, res) => {
 }
 
 const getEducationalProfiles = async (req, res) => {
-    try {
-        const userId = req.params
+  try {
+    const userId = req.params
 
-        const userExists = await userService.getUserById(userId.userId)
-        if (!userExists) {
-            const error = new Error('¡EL usuario no existe!')
-            return res.status(httpStatus.NOT_FOUND).json({
-                ok: false,
-                msg: error.message
-            });
-        }
-        const profile = await userService.getEducationalProfilesByIdUser(userId)
-        if (!profile) {
-            const error = new Error('¡No se pudo obtener el perfil!')
-            return res.status(httpStatus.NOT_FOUND).json({
-                ok: false,
-                msg: error.message
-            });
-        }
-
-        return res.status(httpStatus.OK).json({ data: profile });
-    } catch (error) {
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            ok: false,
-            msg: error.message
-        });
+    const userExists = await userService.getUserById(userId.userId)
+    if (!userExists) {
+      const error = new Error('¡EL usuario no existe!')
+      return res.status(httpStatus.NOT_FOUND).json({
+        ok: false,
+        msg: error.message
+      })
     }
+    const profile = await userService.getEducationalProfilesByIdUser(userId)
+    if (!profile) {
+      const error = new Error('¡No se pudo obtener el perfil!')
+      return res.status(httpStatus.NOT_FOUND).json({
+        ok: false,
+        msg: error.message
+      })
+    }
+
+    return res.status(httpStatus.OK).json({ data: profile })
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      ok: false,
+      msg: error.message
+    })
+  }
 }
 
 module.exports = { getUserInfo, updateUser, getEducationalProfiles }
