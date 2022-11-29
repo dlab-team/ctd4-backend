@@ -1,15 +1,13 @@
-const httpStatus = require('http-status');
+const { Workprofile } = require('../models')
 
 
 //* create
-const createWorkProfile = async (workprofile) => {
+const createWorkProfile = async (work_profile) => {
     try {
-        return workprofile;
+        const newWorkprofile = await work_profile.save()
+        return newWorkprofile;
     } catch (error) {
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            ok: false,
-            msg: error.mesagge
-        });
+        throw Error(error)
     }
 };
 // * Send data
@@ -17,10 +15,7 @@ const updateDataWorkprofile = async (workprofile) => {
     try {
         return 'workprofile was is successfuly update ', workprofile;
     } catch (error) {
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            ok: false,
-            msg: error.mesagge
-        });
+        throw Error(error)
     }
 };
 const getWorkProfileById = async (userId) => {
@@ -31,10 +26,7 @@ const getWorkProfileById = async (userId) => {
         const workprofile = { id: userId, fullname: 'fake workprofile' }
         return workprofile;
     } catch (error) {
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            ok: false,
-            msg: error.mesagge
-        });
+        throw Error(error)
     }
 
 }
