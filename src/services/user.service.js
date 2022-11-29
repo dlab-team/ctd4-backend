@@ -69,7 +69,7 @@ const generateTokenResponse = async (email, password) => {
 }
 const getEducationalProfilesByIdUser = async (userId) => {
   try {
-    const profile = await EducationalProfile.findOne({ where: userId, attributes: { exclude: ['createdAt', 'updatedAt'] } })
+    const profile = await EducationalProfile.findOne({ where: {userId: userId}, attributes: { exclude: ['createdAt', 'updatedAt'] } })
     return profile
   } catch (error) {
     throw Error(error)

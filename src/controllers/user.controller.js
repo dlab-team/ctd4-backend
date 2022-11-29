@@ -23,9 +23,12 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.user.id
 
-    const { email, fullname, address, phoneNumber, cityId } =
-      req.body.user
+    const { email, fullname, address, phoneNumber, cityId} = req.body.user
+    const EducationalProfileB = req.body.EducationalProfile
+    
+    const EducationInfo = await userService.getEducationalProfilesByIdUser(userId)
     const userExists = await userService.getUserById(userId)
+
     if (!userExists) {
       const error = new Error('¡EL usuario no existe!')
       return res.status(httpStatus.NOT_FOUND).json({
@@ -40,6 +43,36 @@ const updateUser = async (req, res) => {
     userExists.cityId = cityId || userExists.cityId
 
     const updateUser = await userService.saveUser(userExists)
+
+
+    //preguntar si viene la actualizacion de datos
+    if ( EducationalProfileB ) {
+
+      // Destruir educational profile
+      if (EducationInfo != null) {
+        await EducationInfo.destroy({
+          where: {
+            userId: userId
+          }
+        })
+      }
+
+      //recorrer Educational Profile
+      for(educational of EducationalProfileB){
+        // insertar en la tabla
+        const educationalProfile = await EducationalProfile.create({
+          userId: updateUser.id,
+          levelEducational: educational.levelEducational,
+          careerName: educational.careerName,
+          institutionName: educational.institutionName,
+          institutionType: educational.institutionType,
+          currentSituation: educational.currentSituation,
+          graduationDate: educational.graduationDate
+        })
+      }
+
+    }
+
 
     if (!updateUser) {
       const error = new Error('¡EL usuario No pudo ser actualizado!')
