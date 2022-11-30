@@ -1,9 +1,10 @@
-const { userService } = require('../services')
+const { userService, workprofileService } = require('../services')
 const httpStatus = require('http-status')
-const { User } = require('../models')
+const { User, WorkProfile } = require('../models')
 const { passwordHashing } = require('../utils/password.util')
 const { emailForgotPassword } = require('../utils/emails.util')
 const { createToken, decodeToken } = require('../utils/token.util')
+
 
 
 const userAuth = async (req, res, next) => {
@@ -33,7 +34,16 @@ const userSignup = async (req, res, next) => {
     // Encriptacion de la contraseña
     const passwordHash = await passwordHashing(password)
     const user = await new User({ email, fullname, password: passwordHash })
-    await user.save()
+    const existingUser = await userService.saveUser(user)
+    const newWorkprofile = await new WorkProfile({ userId: existingUser.id })
+    const workprofile = await workprofileService.createWorkProfile(newWorkprofile)
+    if (!workprofile) {
+      const error = new Error('work profile cannot be created')
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        ok: false,
+        msg: error.mesagge
+      })
+    }
     return res.status(httpStatus.OK).json({
       message: 'Usuario autenticado exitosamente',
       user: { email }
