@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 const authRoutes = require('./auth.route')
-const workprofileRoutes = require('./workprofile.route')
 const skillRoutes = require('./skill.route')
 const countryRoutes = require('./country.route')
 const cityRoutes = require('./city.route')
@@ -21,18 +20,13 @@ const defaultRoutes = [
     route: authRoutes
   },
   {
-    path: '/work-profiles',
-    route: workprofileRoutes
-  },
-  {
     path: '/skills',
     route: skillRoutes
   },
   {
     path: '/countries',
     route: countryRoutes
-  },
-  {
+  }, {
     path: '/user',
     route: userRoutes
   },
