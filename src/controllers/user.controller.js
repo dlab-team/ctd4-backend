@@ -26,7 +26,7 @@ const updateUser = async (req, res) => {
     const EducationInfo = await userService.getEducationalProfilesByIdUser(
       userId
     )
-    // const { foto } = req.files
+    const { foto } = req.files
 
     const userExists = await userService.getUserById(userId)
 
@@ -95,48 +95,47 @@ const updateUser = async (req, res) => {
       softSkills } = workprofile
 
 
-    // //Validación requisitos foto de perfil
-    // const mimeTypes = ["image/jpeg", "image/png"]
-    // if (!mimeTypes.includes(foto.mimetype)) {
-    //   return res
-    //     .status(httpStatus.BAD_REQUEST)
-    //     .json({ message: 'Solo se admiten archivos png o jpg' })
-    // }
-    // if (foto.size > 5 * 1024 * 1024) {
-    //   return res
-    //     .status(httpStatus.BAD_REQUEST)
-    //     .json({ message: 'La foto excede el peso de 5MB' })
-    // }
+    //Validación requisitos foto de perfil
+    const mimeTypes = ["image/jpeg", "image/png"]
+    if (!mimeTypes.includes(foto.mimetype)) {
+      return res
+        .status(httpStatus.BAD_REQUEST)
+        .json({ message: 'Solo se admiten archivos png o jpg' })
+    }
+    if (foto.size > 5 * 1024 * 1024) {
+      return res
+        .status(httpStatus.BAD_REQUEST)
+        .json({ message: 'La foto excede el peso de 5MB' })
+    }
 
-    // const pathFoto = `${uuidv4()}.${foto.mimetype.split("/")[1]}`
+    const pathFoto = `${uuidv4()}.${foto.mimetype.split("/")[1]}`
 
-    // // GUARDAR LA FOTO
+    // GUARDAR LA FOTO
 
-    // foto.mv(path.join(__dirname, "../assets/", pathFoto), (err) => {
-    //   if (err) return req.status().send(err)
-    // })
+    foto.mv(path.join(__dirname, "../assets/", pathFoto), (err) => {
+      if (err) return req.status().send(err)
+    })
 
-    console.log('User ID: ', updateUser.id)
-    const workprofileFound = await workprofileService.getWorkProfileByUserId(updateUser.id)
-    console.log('WORK-PROFILE ID: ', workprofileFound.id)
+    const workprofileFound = await workprofileService.getWorkProfileByUserId(updateUser.id);
 
-    workprofileFound.idealJobComment = idealJobComment || workprofileFound.idealJobComment
-    workprofileFound.featureProyect = featureProyect || workprofileFound.featureProyect
-    workprofileFound.activeVisa = activeVisa || workprofileFound.activeVisa
-    workprofileFound.currentJobSituation = currentJobSituation || workprofileFound.currentJobSituation
-    workprofileFound.yearsExperience = yearsExperience || workprofileFound.yearsExperience
-    workprofileFound.dreamJobComment = dreamJobComment || workprofileFound.dreamJobComment
-    workprofileFound.urlLinkedin = urlLinkedin || workprofileFound.urlLinkedin
-    workprofileFound.urlGithub = urlGithub || workprofileFound.urlGithub
-    workprofileFound.urlWebsite = urlWebsite || workprofileFound.urlWebsite
-    workprofileFound.urlCv = urlCv || workprofileFound.urlCv
-    // workprofileFound.pathFoto = pathFoto || workprofileFound.pathFoto
-    workprofileFound.levelEnglish = levelEnglish || workprofileFound.levelEnglish
+    workprofileFound.idealJobComment = idealJobComment || workprofileFound.idealJobComment;
+    workprofileFound.featureProyect = featureProyect || workprofileFound.featureProyect;
+    workprofileFound.activeVisa = activeVisa || workprofileFound.activeVisa;
+    workprofileFound.currentJobSituation = currentJobSituation || workprofileFound.currentJobSituation;
+    workprofileFound.yearsExperience = yearsExperience || workprofileFound.yearsExperience;
+    workprofileFound.dreamJobComment = dreamJobComment || workprofileFound.dreamJobComment;
+    workprofileFound.urlLinkedin = urlLinkedin || workprofileFound.urlLinkedin;
+    workprofileFound.urlGithub = urlGithub || workprofileFound.urlGithub;
+    workprofileFound.urlWebsite = urlWebsite || workprofileFound.urlWebsite;
+    workprofileFound.urlCv = urlCv || workprofileFound.urlCv;
+    workprofileFound.levelEnglish = levelEnglish || workprofileFound.levelEnglish;
     workprofileFound.employmentStatus = employmentStatus || workprofileFound.employmentStatus
-    workprofileFound.availability = availability || workprofileFound.availability
-    workprofileFound.softSkills = softSkills || workprofileFound.softSkills
+    workprofileFound.availability = availability || workprofileFound.availability;
+    workprofileFound.softSkills = softSkills || workprofileFound.softSkills;
+    workprofileFound.pathFoto = pathFoto || workprofileFound.pathFoto;
 
-    const workprofileSaved = await workprofileService.saveWorkProfile(workprofileFound)
+
+    const workprofileSaved = await workprofileService.saveWorkProfile(workprofileFound);
 
     if (!workprofileSaved) {
       const error = new Error('El Perfil del usuario no pudo ser actualizado')

@@ -12,8 +12,11 @@ const checkAuth = async (req, res, next) => {
             const decoded = decodeToken(token)
             // we return the user added in the request and thus be able to be required as a parameter by the following middleware until we reach the controlle
             const user = await userService.getUserByEmail(decoded)
+            if (!user) {
+                const error = new Error('Error de usuario no coincide token')
+                return res.status(httpStatus.UNAUTHORIZED).json({ message: error.message });
+            }
             req.user = user
-
 
             return next();
         } catch (error) {
