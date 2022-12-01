@@ -1,4 +1,10 @@
-const { User, City, Country, EducationalProfile } = require('../models')
+const {
+  User,
+  City,
+  Country,
+  EducationalProfile,
+  WorkProfile
+} = require('../models')
 const { comparePassword } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
 
@@ -31,37 +37,61 @@ const findUser = async ({ email, password }) => {
 }
 getUserByEmail = async (email) => {
   try {
-    const userFound = await User.findOne({ where: { email }, attributes: { exclude: ['password'] } })
+    const userFound = await User.findOne({
+      where: { email },
+      attributes: { exclude: ['password'] }
+    })
     return userFound
   } catch (error) {
     throw Error(error)
-
   }
 }
 getUserById = async (id) => {
   try {
     const userFound = await User.findOne({
       where: { id },
-      include: { model: City, include: { model: Country } },
+      include: { model: City, include: { model: Country } }
+    })
 
-    });
-
-    return userFound;
+    return userFound
   } catch (error) {
     throw Error(error)
-
   }
 }
+
+getFullInfoUserById = async (id) => {
+  try {
+    const userFound = await User.findOne({
+      where: { id },
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: City,
+          include: { model: Country }
+        },
+        {
+          model: EducationalProfile
+        },
+        {
+          model: WorkProfile
+        }
+      ]
+    })
+
+    return userFound
+  } catch (error) {
+    throw Error(error)
+  }
+}
+
 const saveUser = async (user) => {
   try {
-    const newUser = await user.save();
-    return newUser;
+    const newUser = await user.save()
+    return newUser
   } catch (error) {
     throw Error(error)
-
   }
 }
-
 
 const generateTokenResponse = async (email, password) => {
   const token = createToken({ email: email }, 7200)
@@ -69,11 +99,22 @@ const generateTokenResponse = async (email, password) => {
 }
 const getEducationalProfilesByIdUser = async (userId) => {
   try {
-    const profile = await EducationalProfile.findOne({ where: {userId: userId}, attributes: { exclude: ['createdAt', 'updatedAt'] } })
+    const profile = await EducationalProfile.findOne({
+      where: { userId: userId },
+      attributes: { exclude: ['createdAt', 'updatedAt'] }
+    })
     return profile
   } catch (error) {
     throw Error(error)
   }
 }
 
-module.exports = { findUser, generateTokenResponse, getUserByEmail, getUserById, saveUser, getEducationalProfilesByIdUser }
+module.exports = {
+  findUser,
+  generateTokenResponse,
+  getUserByEmail,
+  getUserById,
+  getFullInfoUserById,
+  saveUser,
+  getEducationalProfilesByIdUser
+}

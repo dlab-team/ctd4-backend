@@ -4,11 +4,8 @@ const { userService } = require('../services')
 
 const getUserInfo = async (req, res) => {
   try {
-    const userInfo = await User.findOne({
-      attributes: { exclude: ['password'] },
-      include: [{ model: WorkProfile }, { model: EducationalProfile }],
-      where: { id: req.user.id }
-    })
+    const userId = req.user.id
+    const userInfo = await userService.getFullInfoUserById(userId)
 
     res.json(userInfo)
   } catch (error) {
@@ -23,10 +20,12 @@ const updateUser = async (req, res) => {
   try {
     const userId = req.user.id
 
-    const { email, fullname, address, phoneNumber, cityId} = req.body.user
+    const { email, fullname, address, phoneNumber, cityId } = req.body.user
     const EducationalProfileB = req.body.EducationalProfile
-    
-    const EducationInfo = await userService.getEducationalProfilesByIdUser(userId)
+
+    const EducationInfo = await userService.getEducationalProfilesByIdUser(
+      userId
+    )
     const userExists = await userService.getUserById(userId)
 
     if (!userExists) {
@@ -44,10 +43,8 @@ const updateUser = async (req, res) => {
 
     const updateUser = await userService.saveUser(userExists)
 
-
     //preguntar si viene la actualizacion de datos
-    if ( EducationalProfileB ) {
-
+    if (EducationalProfileB) {
       // Destruir educational profile
       if (EducationInfo != null) {
         await EducationInfo.destroy({
@@ -58,7 +55,7 @@ const updateUser = async (req, res) => {
       }
 
       //recorrer Educational Profile
-      for(educational of EducationalProfileB){
+      for (educational of EducationalProfileB) {
         // insertar en la tabla
         const educationalProfile = await EducationalProfile.create({
           userId: updateUser.id,
@@ -70,9 +67,7 @@ const updateUser = async (req, res) => {
           graduationDate: educational.graduationDate
         })
       }
-
     }
-
 
     if (!updateUser) {
       const error = new Error('¡EL usuario No pudo ser actualizado!')
