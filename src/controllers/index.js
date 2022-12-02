@@ -7,6 +7,8 @@ const userController = require('./user.controller')
 const chargeController = require('./charge.controller')
 const quizController = require('./quiz.controller')
 
+const labelController = require('./label.controller')
+
 module.exports = {
   authController,
   cityController,
@@ -15,5 +17,6 @@ module.exports = {
   chargeController,
   skillController,
   countryController,
-  quizController
+  quizController,
+  labelController
 }
