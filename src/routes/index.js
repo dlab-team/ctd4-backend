@@ -8,6 +8,7 @@ const cityRoutes = require('./city.route')
 const categoryRoutes = require('./category.route')
 const chargeRoutes = require('./charge.route')
 const quizzRoutes = require('./quiz.route')
+const labelRoutes = require('./label.route')
 
 const userRoutes = require('./user.route')
 
@@ -26,7 +27,8 @@ const defaultRoutes = [
   {
     path: '/countries',
     route: countryRoutes
-  }, {
+  },
+  {
     path: '/user',
     route: userRoutes
   },
@@ -45,6 +47,10 @@ const defaultRoutes = [
   {
     path: '/quizzes',
     route: quizzRoutes
+  },
+  {
+    path: '/labels',
+    route: labelRoutes
   }
 ]
 
