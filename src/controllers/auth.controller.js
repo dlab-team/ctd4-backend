@@ -36,7 +36,7 @@ const userSignup = async (req, res, next) => {
     const user = await new User({ email, fullname, password: passwordHash })
     const existingUser = await userService.saveUser(user)
     const newWorkprofile = await new WorkProfile({ userId: existingUser.id })
-    const workprofile = await workprofileService.createWorkProfile(newWorkprofile)
+    const workprofile = await workprofileService.saveWorkProfile(newWorkprofile)
     if (!workprofile) {
       const error = new Error('work profile cannot be created')
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({

@@ -1,29 +1,22 @@
-const { Workprofile } = require('../models')
+const { WorkProfile } = require('../models')
 
 
 //* create
-const createWorkProfile = async (work_profile) => {
+const saveWorkProfile = async (workprofile) => {
     try {
-        const newWorkprofile = await work_profile.save()
-        return newWorkprofile;
+        const workprofileSaved = await workprofile.save()
+        return workprofileSaved;
     } catch (error) {
         throw Error(error)
     }
 };
-// * Send data
-const updateDataWorkprofile = async (workprofile) => {
+const getWorkProfileByUserId = async (user_id) => {
     try {
-        return 'workprofile was is successfuly update ', workprofile;
-    } catch (error) {
-        throw Error(error)
-    }
-};
-const getWorkProfileById = async (userId) => {
-    try {
-        // const workprofile = await WorkProfile.findOne({
-        // where: userId,
-        // })        
-        const workprofile = { id: userId, fullname: 'fake workprofile' }
+
+        const workprofile = await WorkProfile.findOne({
+            where: { userId: user_id },
+        })
+        // const workprofile = { id: userId }
         return workprofile;
     } catch (error) {
         throw Error(error)
@@ -32,7 +25,6 @@ const getWorkProfileById = async (userId) => {
 }
 
 module.exports = {
-    updateDataWorkprofile,
-    createWorkProfile,
-    getWorkProfileById
+    saveWorkProfile,
+    getWorkProfileByUserId
 }
