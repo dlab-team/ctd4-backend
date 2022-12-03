@@ -17,6 +17,9 @@ module.exports = {
       cityId: {
         type: Sequelize.INTEGER
       },
+      roleId: {
+        type: Sequelize.INTEGER
+      },
       fullname: {
         type: Sequelize.STRING
       },

@@ -6,8 +6,8 @@ module.exports = {
       'WorkProfiles',
       [
         {
-          userId: 1,
-          idealJobComment: 'empresas solidas en desarrollo de woftware',
+          userId: 2,
+          idealJobComment: 'empresas solidas en desarrollo de software',
           featureProyect: 'Ser parte de un proyecto de software',
           activeVisa: 'Estados unidos',
           currentJobSituation: 'Tengo trabajo en TI, pero busco otro',
