@@ -77,7 +77,6 @@ getFullInfoUserById = async (id) => {
         }
       ]
     })
-
     return userFound
   } catch (error) {
     throw Error(error)
