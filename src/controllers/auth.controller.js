@@ -5,8 +5,6 @@ const { passwordHashing } = require('../utils/password.util')
 const { emailForgotPassword } = require('../utils/emails.util')
 const { createToken, decodeToken } = require('../utils/token.util')
 
-
-
 const userAuth = async (req, res, next) => {
   try {
     const { email, password, success } = await userService.findUser(req.body)
@@ -33,7 +31,12 @@ const userSignup = async (req, res, next) => {
 
     // Encriptacion de la contraseña
     const passwordHash = await passwordHashing(password)
-    const user = await new User({ email, fullname, password: passwordHash })
+    const user = await new User({
+      email,
+      fullname,
+      password: passwordHash,
+      role_id: 2
+    })
     const existingUser = await userService.saveUser(user)
     const newWorkprofile = await new WorkProfile({ userId: existingUser.id })
     const workprofile = await workprofileService.saveWorkProfile(newWorkprofile)
@@ -62,7 +65,6 @@ const userLogout = (req, res) => {
   }
 }
 const recoveryPassword = async (req, res) => {
-
   try {
     const { email } = req.body
 
@@ -72,18 +74,20 @@ const recoveryPassword = async (req, res) => {
       const error = new Error('User not found!')
       return res.status(httpStatus.NOT_FOUND).json({ msg: error.message })
     }
-    const expiresIn = 60 * 60;
+    const expiresIn = 60 * 60
 
-    user.token = createToken({ id: user._id, email: user.email }, expiresIn);
+    user.token = createToken({ id: user._id, email: user.email }, expiresIn)
 
     await userService.saveUser(user)
 
     // send email
-    const { email: _email, fullname, token } = user;
+    const { email: _email, fullname, token } = user
 
     emailForgotPassword({ _email, fullname, token })
 
-    res.status(httpStatus.OK).json({ msg: "Se ha enviado un correo electrónico de confirmación a su correo electrónico." });
+    res.status(httpStatus.OK).json({
+      msg: 'Se ha enviado un correo electrónico de confirmación a su correo electrónico.'
+    })
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       ok: false,
@@ -106,7 +110,7 @@ const verifyPassword = async (req, res) => {
       return res.status(httpStatus.NOT_FOUND).json({ msg: error.message })
     }
 
-    res.status(httpStatus.OK).json({ msg: "la contraseña ha sido verificada" });
+    res.status(httpStatus.OK).json({ msg: 'la contraseña ha sido verificada' })
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       ok: false,
@@ -130,12 +134,14 @@ const createPassword = async (req, res) => {
       return res.status(httpStatus.NOT_FOUND).json({ msg: error.message })
     }
     // TODO: define or not a new password validation method
-    user.password = password;
-    user.token = null;
+    user.password = password
+    user.token = null
 
     await userService.saveUser(user)
 
-    res.status(httpStatus.OK).json({ msg: "Se ha creado una nueva contraseña con éxito", data: user });
+    res
+      .status(httpStatus.OK)
+      .json({ msg: 'Se ha creado una nueva contraseña con éxito', data: user })
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       ok: false,
@@ -144,4 +150,11 @@ const createPassword = async (req, res) => {
   }
 }
 
-module.exports = { userAuth, userSignup, userLogout, recoveryPassword, createPassword, verifyPassword }
+module.exports = {
+  userAuth,
+  userSignup,
+  userLogout,
+  recoveryPassword,
+  createPassword,
+  verifyPassword
+}
