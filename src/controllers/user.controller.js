@@ -200,7 +200,6 @@ const getUsers = async (req, res) => {
 
   try {
     const users = await userService.getDataUsers()
-    console.log(users)
     if (!users) {
       const error = new Error('No se pudo obtener la lista de usuarios')
       return res.status(httpStatus.NOT_FOUND).json({
