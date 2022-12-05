@@ -35,7 +35,7 @@ const userSignup = async (req, res, next) => {
       email,
       fullname,
       password: passwordHash,
-      role_id: 2
+      roleId: 2
     })
     const existingUser = await userService.saveUser(user)
     const newWorkprofile = await new WorkProfile({ userId: existingUser.id })
