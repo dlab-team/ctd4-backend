@@ -8,6 +8,8 @@ const router = express.Router()
 
 router.route("/")
     .get(checkAuth, userController.getUserInfo)
+router.route("/data")
+    .get(checkAuth, userController.getUsers)
 router.route("/:userId")
     .put([checkAuth, validateUser, validate], userController.updateUser)
 router.route('/:userId/educational')
