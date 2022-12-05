@@ -164,7 +164,49 @@
       "get": {
         "summary": "Get Labels",
         "description": "Get Labels",
-        "tags": ["Labels"]
+        "tags": ["Labels"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "labels": [
+                  {
+                    "id": 1,
+                    "name": "Frontend"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Backend"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Fullstack"
+                  },
+                  {
+                    "id": 4,
+                    "name": "Mobile"
+                  },
+                  {
+                    "id": 5,
+                    "name": "DevOps"
+                  },
+                  {
+                    "id": 6,
+                    "name": "QA"
+                  },
+                  {
+                    "id": 7,
+                    "name": "UX/UI"
+                  },
+                  {
+                    "id": 8,
+                    "name": "Data Science"
+                  }
+                ]
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Create Label",
@@ -214,6 +256,283 @@
             "examples": {
               "application/json": {
                 "msg": "La etiqueta se elimino correctamente"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quizzes": {
+      "get": {
+        "summary": "Get Quizzes",
+        "description": "Get Quizzes",
+        "tags": ["Quizzes"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "quizzes": [
+                  {
+                    "id": 1,
+                    "url_logo": "https://cdn-icons-png.flaticon.com/512/2085/2085206.png",
+                    "name": "html-css",
+                    "duration": 15
+                  },
+                  {
+                    "id": 2,
+                    "url_logo": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
+                    "name": "JavaScript",
+                    "duration": 20
+                  },
+                  {
+                    "id": 3,
+                    "url_logo": "https://cdn-icons-png.flaticon.com/512/270/270780.png",
+                    "name": "Android",
+                    "duration": 20
+                  },
+                  {
+                    "id": 4,
+                    "url_logo": "https://cdn-icons-png.flaticon.com/512/873/873107.png",
+                    "name": "Azure DevOps",
+                    "duration": 20
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Quiz",
+        "description": "Create Quiz",
+        "tags": ["Quizzes"],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createQuiz"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "msg": {
+                  "id": 1,
+                  "name": "Quiz 1",
+                  "url_logo": " foto.png",
+                  "duration": 120,
+                  "createdAt": "2022-12-03T17:40:32.540Z",
+                  "updatedAt": "2022-12-03T17:40:32.540Z"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Quiz",
+        "description": "Delete Quiz",
+        "tags": ["Quizzes"],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "msg": "El quiz se elimino correctamente"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "summary": "Get Skills",
+        "description": "Get Skills",
+        "tags": ["Skills"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "skills": [
+                  {
+                    "id": 1,
+                    "name": "HTML"
+                  },
+                  {
+                    "id": 2,
+                    "name": "CSS"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charges": {
+      "get": {
+        "summary": "Get Charges",
+        "description": "Get Charges",
+        "tags": ["Charges"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "charges": [
+                  {
+                    "id": 1,
+                    "name": "Desarrollador/a Full stack"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Desarrollador/a Backend"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Desarrollador/a Frontend"
+                  },
+                  {
+                    "id": 4,
+                    "name": "Diseñador/a UI/UX Research o UI"
+                  },
+                  {
+                    "id": 5,
+                    "name": "Desarrollador/a Movil"
+                  },
+                  {
+                    "id": 6,
+                    "name": "Data Scientist o especialista Machine Learning"
+                  },
+                  {
+                    "id": 7,
+                    "name": "Ingeniería de Datos"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "summary": "Get Cities",
+        "description": "Get Cities",
+        "tags": ["Cities"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "cities": [
+                  {
+                    "id": 1,
+                    "countryId": 1,
+                    "name": "Santiago"
+                  },
+                  {
+                    "id": 2,
+                    "countryId": 1,
+                    "name": "Concepción"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/countries": {
+      "get": {
+        "summary": "Get Countries",
+        "description": "Get Countries",
+        "tags": ["Countries"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "countries": [
+                  {
+                    "id": 1,
+                    "name": "Chile"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Perú"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Colombia"
+                  },
+                  {
+                    "id": 4,
+                    "name": "Bolivia"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "Get Categories",
+        "description": "Get Categories",
+        "tags": ["Categories"],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "countries": [
+                  {
+                    "id": 1,
+                    "name": "Lenguaje - Nivel 1",
+                    "Skills": [
+                      {
+                        "id": 1,
+                        "name": "Python"
+                      },
+                      {
+                        "id": 2,
+                        "name": "JavaScript"
+                      },
+                      {
+                        "id": 3,
+                        "name": "HTML/CSS"
+                      }
+                    ]
+                  },
+                  {
+                    "id": 2,
+                    "name": "Framework - Nivel 1",
+                    "Skills": [
+                      {
+                        "id": 17,
+                        "name": "Oracle"
+                      },
+                      {
+                        "id": 18,
+                        "name": "Cassandra"
+                      },
+                      {
+                        "id": 19,
+                        "name": "SQLite"
+                      }
+                    ]
+                  }
+                ]
               }
             }
           }
@@ -340,6 +659,23 @@
         "name": {
           "type": "string",
           "example": "label"
+        }
+      }
+    },
+    "createQuiz": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "Prueba 1",
+          "example": "label"
+        },
+        "url_logo": {
+          "type": "string",
+          "example": "https://foto.com/foto.png"
+        },
+        "duration": {
+          "type": "integer",
+          "example": 120
         }
       }
     },

@@ -75,7 +75,9 @@ const deleteQuiz = async (req, res) => {
         id: req.params.id
       }
     })
-    res.json(quizes)
+    return res.status(httpStatus.OK).json({
+      msg: 'El quiz se elimino correctamente'
+    })
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       ok: false,
