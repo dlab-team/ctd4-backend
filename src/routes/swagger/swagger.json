@@ -159,6 +159,66 @@
           }
         }
       }
+    },
+    "/labels": {
+      "get": {
+        "summary": "Get Labels",
+        "description": "Get Labels",
+        "tags": ["Labels"]
+      },
+      "post": {
+        "summary": "Create Label",
+        "description": "Create Label",
+        "tags": ["Labels"],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/createLabel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "msg": {
+                  "id": 1,
+                  "name": "label",
+                  "createdAt": "2022-12-03T17:40:32.540Z",
+                  "updatedAt": "2022-12-03T17:40:32.540Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/labels/:id": {
+      "delete": {
+        "summary": "Delete Label",
+        "description": "Delete Label",
+        "tags": ["Labels"],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "examples": {
+              "application/json": {
+                "msg": "La etiqueta se elimino correctamente"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -271,6 +331,15 @@
               }
             }
           }
+        }
+      }
+    },
+    "createLabel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "label"
         }
       }
     },
