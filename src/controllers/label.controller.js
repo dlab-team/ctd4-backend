@@ -7,7 +7,7 @@ const { Labels } = require('../models')
 const getLabel = async (req, res) => {
   try {
     const labels = await Labels.findAll({
-      attributes: ['name']
+      attributes: ['id', 'name']
     })
     res.json(labels)
   } catch (error) {
