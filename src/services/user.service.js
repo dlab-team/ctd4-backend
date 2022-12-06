@@ -1,11 +1,9 @@
-const { Op } = require('sequelize')
 const {
   User,
   City,
   Country,
   EducationalProfile,
-  WorkProfile,
-  Role
+  WorkProfile
 } = require('../models')
 const { comparePassword } = require('../utils/password.util')
 const { createToken } = require('../utils/token.util')
@@ -110,41 +108,6 @@ const getEducationalProfilesByIdUser = async (userId) => {
   }
 }
 
-const getDataUsers = async () => {
-
-  try {
-    const users = await User.findAll({
-      attributes: {
-        exclude: ['roleId', 'cityId', 'createdAt', 'updatedAt', 'password']
-      },
-      include: [
-        {
-          model: City,
-          attributes: {
-            exclude: ['id', 'createdAt', 'updatedAt', 'countryId',]
-          },
-          include: {
-            model: Country,
-            attributes: {
-              exclude: ['id', 'createdAt', 'updatedAt']
-            },
-          }
-        },
-        {
-          model: Role,
-          attributes: {
-            exclude: ['id', 'createdAt', 'updatedAt']
-          },
-        }
-      ]
-    });
-    return users
-  } catch (error) {
-    throw Error(error)
-  }
-}
-
-
 module.exports = {
   findUser,
   generateTokenResponse,
@@ -152,6 +115,5 @@ module.exports = {
   getUserById,
   getFullInfoUserById,
   saveUser,
-  getDataUsers,
   getEducationalProfilesByIdUser
 }
